@@ -1,8 +1,12 @@
 package control;
 
-import elements.Skull;
+import elements.Blinky;
+import elements.Clyde;
+//import elements.Skull;
 import elements.Lolo;
 import elements.Element;
+import elements.Inky;
+import elements.Pinky;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -56,7 +60,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
 
         Inky inky = new Inky("inky_right.png");
         inky.setPosition(5,12);
-        thid.addElement(inky);
+        this.addElement(inky);
 
         Clyde clyde = new Clyde("clyde_right.png");
         clyde.setPosition(5,13);
