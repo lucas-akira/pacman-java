@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/akira/Documents/POO/pacman-teste/src/control/GameScreen.java</file>
-            <file>file:/home/akira/Documents/POO/pacman-teste/src/elements/Ghost.java</file>
-            <file>file:/home/akira/Documents/POO/pacman-teste/src/elements/Fruit.java</file>
-            <file>file:/home/akira/Documents/POO/pacman-teste/src/elements/PacDot.java</file>
-            <file>file:/home/akira/Documents/POO/pacman-teste/src/elements/Element.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Inky.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Pinky.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Lolo.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Ghost.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Blinky.java</file>
+            <file>file:/home/tiago/Desktop/USP%20-%20Coding%20Works/POO/pacman-java/src/elements/Element.java</file>
         </group>
     </open-files>
 </project-private>

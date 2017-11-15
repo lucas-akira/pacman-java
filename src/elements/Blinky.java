@@ -8,7 +8,10 @@ import java.awt.Graphics;
 
 public class Blinky extends Ghost{
 	
-
+        // Imita os movimentos do pacman
+        private void move(double x, double y){
+            setPosition(x,y);
+        }
 
 	public Blinky(String imagename){
 		super(imagename);

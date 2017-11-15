@@ -8,8 +8,19 @@ import java.awt.Graphics;
 
 public class Clyde extends Ghost{
 
-	public Clyde(String imagename){
+	private void move(double x, double y){
+            if(dist(x,y) < 5){
+                // random shit
+            }
+            else{
+                setPosition(x,y);
+            }
+            
+        }
+    
+        public Clyde(String imagename){
 		super(imagename);
 	}
+       
 	
 }

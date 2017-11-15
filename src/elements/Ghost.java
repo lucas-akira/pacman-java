@@ -18,6 +18,10 @@ public class Ghost extends Element{
         this.isTransposable = false;
         this.isMortal = true;
     }
+    
+    protected double dist(double x, double y){
+            return Math.sqrt(x*x + y*y);
+        }
 
     public void autoDraw(Graphics g) {
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
