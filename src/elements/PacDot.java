@@ -9,9 +9,11 @@ public class PacDot extends Element {
 
 	public PacDot(String imagename){
 		super(imagename);
-		//this.isTranposable = true;
+		this.isTransposable = true;
 	}
-        public void autoDraw(Graphics g) {
-            
+        
+        @Override
+        public void autoDraw(Graphics g){
+            Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
         }
 }

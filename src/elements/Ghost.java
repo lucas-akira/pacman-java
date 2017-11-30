@@ -18,16 +18,13 @@ public class Ghost extends Element{
         this.isTransposable = false;
         this.isMortal = true;
     }
-
-    public void autoDraw(Graphics g) {
-        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
-
-        this.contIntervals++;
-        if(this.contIntervals == Consts.TIMER_FOGO){
-            this.contIntervals = 0;
-            //Fire f = new Fire("fire.png");
-            //f.setPosition(pos.getX(),pos.getY()+1);
-            //Drawing.getGameScreen().addElement(f);
+    
+    protected double dist(double x, double y){
+            return Math.sqrt(x*x + y*y);
         }
-    }    
+
+    @Override
+    public void autoDraw(Graphics g){
+        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());   
+    }
 }
