@@ -22,12 +22,15 @@ public abstract class Element implements Serializable{
     protected boolean isTransposable; // Pode passar por cima?
     protected boolean isMortal;       // Se encostar, morre?
 
+    // Construtor
     protected Element(String imageName) {
         this.pos = new Position(1, 1);
         this.isTransposable = true;
         this.isMortal = false;
         
         try {
+            
+            // A linha abaixo identifica o caminho da imagem que foi passada no construtor
             imageIcon = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
             Image img = imageIcon.getImage();
             BufferedImage bi = new BufferedImage(Consts.CELL_SIZE, Consts.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
@@ -66,6 +69,7 @@ public abstract class Element implements Serializable{
         this.isTransposable = isTransposable;
     }
 
+    // É a função responsável por chamar a Drawing para desenhar o elemento
     abstract public void autoDraw(Graphics g);
 
     public boolean moveUp() {
@@ -82,5 +86,9 @@ public abstract class Element implements Serializable{
 
     public boolean moveLeft() {
         return this.pos.moveLeft();
+    }
+    
+    public boolean isMortal(){
+        return isMortal;
     }
 }

@@ -17,9 +17,12 @@ public class Drawing {
         return screen;
     }
 
+    // Define uma nova tela para a aplicação
     public static void setGameScreen(GameScreen newScreen) {
         screen = newScreen;
-    }    
+    }
+
+    // Imprime a tela inteira
     public static void draw(Graphics g, ImageIcon imageIcon, double y, double x) {
         //System.out.println("y="+(y * Consts.CELL_SIZE)+", x="+(x * Consts.CELL_SIZE));
         imageIcon.paintIcon(screen, g, (int)Math.round(y * Consts.CELL_SIZE),(int)Math.round(x * Consts.CELL_SIZE));

@@ -37,7 +37,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         Drawing.setGameScreen(this);
         initComponents();
         
-        this.addKeyListener(this);   /*teclado*/
+        this.addKeyListener(this);   // Adiciona o funcionamento do teclado
         
         /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
@@ -45,27 +45,28 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
 
         elemArray = new ArrayList<Element>();
 
-        /*Cria e adiciona elementos*/
-        lolo = new Lolo("lolo_right.png");
-        lolo.setPosition(17, 11);
+        // Cria o Pacman na posição inicial
+        lolo = new Lolo("pacman.png");
+        lolo.setPosition(13, 10);
         this.addElement(lolo);
         
-        Blinky blinky = new Blinky("blinky_right.png");
-        blinky.setPosition(5, 10);
+        // Cria os fantasmas e adiciona eles na tela
+        Blinky blinky = new Blinky("blinky.png");
+        blinky.setPosition(9,8);
         this.addElement(blinky);
 
-        Pinky pinky = new Pinky("pinky_right.png");
-        pinky.setPosition(5,11);
+        Pinky pinky = new Pinky("pinky.png");
+        pinky.setPosition(9,9);
         this.addElement(pinky);
 
-        Inky inky = new Inky("inky_right.png");
-        inky.setPosition(5,12);
+        Inky inky = new Inky("inky.png");
+        inky.setPosition(9,10);
         this.addElement(inky);
 
-        Clyde clyde = new Clyde("clyde_right.png");
-        clyde.setPosition(5,13);
+        Clyde clyde = new Clyde("clyde.png");
+        clyde.setPosition(9,11);
         this.addElement(clyde);
-
+        
     }
     
     public final void addElement(Element elem) {
@@ -90,7 +91,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         for (int i = 0; i < Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "bricks.png");
+                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background1.png");
                     g2.drawImage(newImage,
                             j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
                     

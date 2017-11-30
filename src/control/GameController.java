@@ -1,7 +1,7 @@
 package control;
 
 import elements.Element;
-import elements.Lolo;
+import elements.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -13,7 +13,8 @@ import java.util.ArrayList;
  */
 public class GameController {
     
-    // Imprime todos os elementos na tela
+    // Imprime todos os elementos na tela chamando a função autoDraw de cada um deles.
+    // Recebe um arrayList com todos os elementos.
 
     public void drawAllElements(ArrayList<Element> elemArray, Graphics g){
         for(int i=0; i<elemArray.size(); i++){
@@ -28,17 +29,31 @@ public class GameController {
         
         Lolo lLolo = (Lolo)e.get(0);
         if (!isValidPosition(e, lLolo)) {
+            
+            // Impede que o pacman acesse uma posição inválida
             lLolo.backToLastPosition();
             lLolo.setMovDirection(Lolo.STOP);
             return;
         }
         
         Element eTemp;
+        
+        // Verifica todos os elementos da tela
         for(int i = 1; i < e.size(); i++){
+            
             eTemp = e.get(i);
-            if(lLolo.overlap(eTemp))
+            
+            // Caso o Pacman esteja sobre o elemento
+            if(lLolo.overlap(eTemp)){
+                
+                // Verifica se o elemento é transponível, se sim, passa por cima
                 if(eTemp.isTransposable())
                     e.remove(eTemp);
+                
+                // Verifica se o elemento é mortal, se sim, mata o pacman
+                // Não implementado ainda
+            }
+            
         }
         
         lLolo.move();

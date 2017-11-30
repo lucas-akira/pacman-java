@@ -37,6 +37,10 @@ public class Lolo extends Element  implements Serializable{
         movDirection = direction;
     }
     
+    public int getMovDirection(){
+        return movDirection;
+    }
+    
     public void move() {
         switch (movDirection) {
             case MOVE_LEFT:
