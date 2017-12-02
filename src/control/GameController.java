@@ -28,13 +28,8 @@ public class GameController {
             return;
         
         Lolo lLolo = (Lolo)e.get(0);
-        if (!isValidPosition(e, lLolo)) {
-            
-            // Impede que o pacman acesse uma posição inválida
-            lLolo.backToLastPosition();
-            lLolo.setMovDirection(Lolo.STOP);
-            return;
-        }
+
+        lLolo.correctBuggyMovement(e, this);
         
         Element eTemp;
         
@@ -47,9 +42,13 @@ public class GameController {
             if(lLolo.overlap(eTemp)){
                 
                 // Verifica se o elemento é transponível, se sim, passa por cima
-                if(eTemp.isTransposable())
+                if(eTemp.isTransposable()){
                     e.remove(eTemp);
-                
+                    if(eTemp.getScore() == 10){
+                        lLolo.totalDots--;
+                    }
+                    lLolo.addScore(eTemp.getScore());
+                }
                 // Verifica se o elemento é mortal, se sim, mata o pacman
                 // Não implementado ainda
             }

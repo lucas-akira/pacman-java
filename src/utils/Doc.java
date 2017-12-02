@@ -21,7 +21,7 @@ public void paintIcon(Component c, Graphics g, int x, int y)
 
 
 
-
+// Verificar o funcionamento do repaint
 
 
 

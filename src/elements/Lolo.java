@@ -1,8 +1,10 @@
 package elements;
 
+import control.GameController;
 import utils.Drawing;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Projeto de POO 2017
@@ -19,7 +21,9 @@ public class Lolo extends Element  implements Serializable{
     public static final int MOVE_DOWN = 4;
     
     private int movDirection = STOP;
-    
+    private int tryMove, lastMove, currentMove;
+    public int totalDots = 0;
+     
     public Lolo(String imageName) {
         super(imageName);
     }
@@ -39,6 +43,84 @@ public class Lolo extends Element  implements Serializable{
     
     public int getMovDirection(){
         return movDirection;
+    }
+    
+    public void correctBuggyAnimation(){
+        switch(lastMove){
+            case MOVE_UP:
+                this.changeImage("pacman_u.png");
+                break;
+                
+            case MOVE_DOWN:
+                this.changeImage("pacman_d.png");
+                break;
+            
+            case MOVE_LEFT:
+                this.changeImage("pacman_l.png");
+                break;
+                
+            case MOVE_RIGHT:
+                this.changeImage("pacman_r.png");
+                break;
+        }
+    }
+    
+    public void correctBuggyMovement(ArrayList<Element> el, GameController c){
+
+        if (tryMove != 0) {
+            setMovDirection(tryMove);
+            move();
+            if (c.isValidPosition(el, this)) {
+                currentMove = tryMove;
+                lastMove = tryMove;
+                tryMove = 0;
+            } else {
+                currentMove = lastMove;
+                backToLastPosition();
+                setMovDirection(currentMove);
+                move();
+                if (!c.isValidPosition(el, this)) {
+                    tryMove = 0;
+                    backToLastPosition();
+                    setMovDirection(STOP);
+                }
+            }
+
+        }else{
+            move();
+            if (!c.isValidPosition(el, this)) {
+               		 tryMove = currentMove;
+                		backToLastPosition();
+                		if(tryMove != lastMove){
+                    			setMovDirection(lastMove);
+                    			move();
+                    			if (!c.isValidPosition(el, this)) {
+                        			tryMove = 0;
+                        			backToLastPosition();
+                        			setMovDirection(STOP);
+                    			}
+                		}else{
+                    			setMovDirection(STOP);
+                		}
+                		currentMove = lastMove;
+            	}else{
+                		if(tryMove == 0)
+                    			lastMove = currentMove;
+            }
+    }
+    correctBuggyAnimation();
+}
+    
+    public int getScore(){
+        return this.score;
+    }
+    
+    public void addScore(int score){
+        this.score += score;
+    }
+    
+    public void setCurrentMove(int move){
+        this.currentMove = move;
     }
     
     public void move() {

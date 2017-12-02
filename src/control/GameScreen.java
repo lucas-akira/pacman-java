@@ -6,7 +6,9 @@ import elements.Clyde;
 import elements.Lolo;
 import elements.Element;
 import elements.Inky;
+import elements.PacDot;
 import elements.Pinky;
+import elements.Wall;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -32,23 +34,36 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private final Lolo lolo;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
+    private int level = 0;
+    private int score = 0;
+    private String[] map = new String[3];
 
     public GameScreen() {
         Drawing.setGameScreen(this);
         initComponents();
         
         this.addKeyListener(this);   // Adiciona o funcionamento do teclado
+        map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
+        map[1] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         
         /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
                      Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
 
         elemArray = new ArrayList<Element>();
-
         // Cria o Pacman na posição inicial
-        lolo = new Lolo("pacman.png");
+        lolo = new Lolo("pacman_r.png");
         lolo.setPosition(13, 10);
         this.addElement(lolo);
+        
+        correctBuggyMap(map[level]);
+    }
+    
+    public void correctBuggyMap(String map){
+        
+        elemArray.clear();
+        lolo.setPosition(13, 10);
+        elemArray.add(lolo);
         
         // Cria os fantasmas e adiciona eles na tela
         Blinky blinky = new Blinky("blinky.png");
@@ -66,7 +81,65 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         Clyde clyde = new Clyde("clyde.png");
         clyde.setPosition(9,11);
         this.addElement(clyde);
+       
         
+        // Adiciona os PacDots
+        
+        // Para cada elemento da tela, verifica se é uma posição válida
+        for (int i = 0; i < Consts.NUM_CELLS/2; i++) {
+            for (int j = 0; j < Consts.NUM_CELLS/2; j++) {
+                boolean aux = true;
+                for(int k = 0; k < elemArray.size(); k++){
+                    if((elemArray.get(k).getPosition().getX() == i || elemArray.get(k).getPosition().getX() == Consts.NUM_CELLS - 1 - i) && 
+                            (elemArray.get(k).getPosition().getY() == j || elemArray.get(k).getPosition().getY() == Consts.NUM_CELLS - 1 - j)){
+                        aux = false;
+                    }
+                 }
+                
+                // Se sim, adiciona na tela
+                if (aux){
+                    if(map.charAt(i*Consts.NUM_CELLS/2 + j) == '1'){
+                        Wall w = new Wall("wall.png");
+                        w.setPosition(i, j);
+                        elemArray.add(w);
+                        
+                        w = new Wall("wall.png");
+                        w.setPosition(Consts.NUM_CELLS - 1 - i, j);
+                        elemArray.add(w);
+                        
+                        w = new Wall("wall.png");
+                        w.setPosition(Consts.NUM_CELLS - 1 - i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(w);
+                        
+                        w = new Wall("wall.png");
+                        w.setPosition(i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(w);
+                    }   
+                    else{
+                        PacDot p = new PacDot("dot.png");
+                        p.setPosition(i, j);
+                        elemArray.add(p);
+                        lolo.totalDots++;
+                        
+                        p = new PacDot("dot.png");
+                        p.setPosition(Consts.NUM_CELLS - 1 - i, j);
+                        elemArray.add(p);
+                        lolo.totalDots++;
+                        
+                        p = new PacDot("dot.png");
+                        p.setPosition(Consts.NUM_CELLS - 1 - i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(p);
+                        lolo.totalDots++;
+                        
+                        p = new PacDot("dot.png");
+                        p.setPosition(i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(p);
+                        lolo.totalDots++;
+                     }
+                     
+                }
+            }
+        }
     }
     
     public final void addElement(Element elem) {
@@ -103,7 +176,11 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition());
+        if(lolo.totalDots == 0){
+            level++;
+            correctBuggyMap(map[level]);
+        }
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "Score: " + lolo.getScore() + "Level: " + level);
         
         g.dispose();
         g2.dispose();
@@ -126,12 +203,16 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             lolo.setMovDirection(Lolo.MOVE_UP);
+            lolo.setCurrentMove(Lolo.MOVE_UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             lolo.setMovDirection(Lolo.MOVE_DOWN);
+            lolo.setCurrentMove(Lolo.MOVE_DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             lolo.setMovDirection(Lolo.MOVE_LEFT);
+            lolo.setCurrentMove(Lolo.MOVE_LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             lolo.setMovDirection(Lolo.MOVE_RIGHT);
+            lolo.setCurrentMove(Lolo.MOVE_RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lolo.setMovDirection(Lolo.STOP);
         }
