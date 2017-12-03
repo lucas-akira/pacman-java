@@ -29,6 +29,7 @@ public class GameController {
         
         Lolo lLolo = (Lolo)e.get(0);
 
+        // Novo método de movimentação
         lLolo.correctBuggyMovement(e, this);
         
         Element eTemp;
@@ -44,9 +45,13 @@ public class GameController {
                 // Verifica se o elemento é transponível, se sim, passa por cima
                 if(eTemp.isTransposable()){
                     e.remove(eTemp);
-                    if(eTemp.getScore() == 10){
+                    
+                    // Se for um pacdot (10 pontos), reduz o contador de controle
+                    if(eTemp instanceof PacDot){
                         lLolo.totalDots--;
                     }
+                    
+                    // Adiciona o score baseado no tipo de elemento
                     lLolo.addScore(eTemp.getScore());
                 }
                 // Verifica se o elemento é mortal, se sim, mata o pacman

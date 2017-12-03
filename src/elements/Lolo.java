@@ -21,8 +21,8 @@ public class Lolo extends Element  implements Serializable{
     public static final int MOVE_DOWN = 4;
     
     private int movDirection = STOP;
-    private int tryMove, lastMove, currentMove;
-    public int totalDots = 0;
+    private int tryMove, lastMove, currentMove; // Variáveis para controlar a movimentação
+    public int totalDots = 0;   // Variável para contar o total de dots na tela
      
     public Lolo(String imageName) {
         super(imageName);
@@ -45,6 +45,7 @@ public class Lolo extends Element  implements Serializable{
         return movDirection;
     }
     
+    // Com esse método, a imagem do Pacman só se altera quando ele efetivamente muda de direção
     public void correctBuggyAnimation(){
         switch(lastMove){
             case MOVE_UP:
@@ -65,6 +66,8 @@ public class Lolo extends Element  implements Serializable{
         }
     }
     
+    
+    // Método usado para corrigir a movimentação travada do pacman devido a construção do tabuleiro
     public void correctBuggyMovement(ArrayList<Element> el, GameController c){
 
         if (tryMove != 0) {
@@ -89,27 +92,27 @@ public class Lolo extends Element  implements Serializable{
         }else{
             move();
             if (!c.isValidPosition(el, this)) {
-               		 tryMove = currentMove;
-                		backToLastPosition();
-                		if(tryMove != lastMove){
-                    			setMovDirection(lastMove);
-                    			move();
-                    			if (!c.isValidPosition(el, this)) {
-                        			tryMove = 0;
-                        			backToLastPosition();
-                        			setMovDirection(STOP);
-                    			}
-                		}else{
-                    			setMovDirection(STOP);
-                		}
-                		currentMove = lastMove;
+                tryMove = currentMove;
+    		backToLastPosition();
+                if(tryMove != lastMove){
+                    setMovDirection(lastMove);
+                    move();
+                    if (!c.isValidPosition(el, this)) {
+                        tryMove = 0;
+                        backToLastPosition();
+                        setMovDirection(STOP);
+                    }
+                }else{
+                    setMovDirection(STOP);
+                }
+                currentMove = lastMove;
             	}else{
-                		if(tryMove == 0)
-                    			lastMove = currentMove;
-            }
+                    if(tryMove == 0)
+                        lastMove = currentMove;
+                }
+        }
+        correctBuggyAnimation();
     }
-    correctBuggyAnimation();
-}
     
     public int getScore(){
         return this.score;

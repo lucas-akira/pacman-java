@@ -23,6 +23,8 @@ public abstract class Element implements Serializable{
     protected boolean isMortal;       // Se encostar, morre?
     protected int score;
     
+    
+    // Essa função é responsável por alterar a imagem de um elemento já criado
     public void changeImage(String imageName){
         try {
             // A linha abaixo identifica o caminho da imagem que foi passada no construtor

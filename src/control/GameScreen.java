@@ -43,10 +43,14 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         initComponents();
         
         this.addKeyListener(this);   // Adiciona o funcionamento do teclado
+        
+        // Declaração dos três mapas de jogo
+        // Cada variável representa 1/4 do mapa total, e é refletida para formar o mapa de modo simétrico
         map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
         map[1] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
+        map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         
-        /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
+        //Cria a janela do tamanho do tabuleiro + insets (bordas) da janela
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
                      Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
 
@@ -56,12 +60,16 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         lolo.setPosition(13, 10);
         this.addElement(lolo);
         
+        // Função que desenha o restante dos elementos na tela
         correctBuggyMap(map[level]);
     }
     
     public void correctBuggyMap(String map){
         
+        // Limpa o array de elementos 
         elemArray.clear();
+        
+        // Adiciona novamente o Pacman no cenário
         lolo.setPosition(13, 10);
         elemArray.add(lolo);
         
@@ -98,23 +106,53 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                 
                 // Se sim, adiciona na tela
                 if (aux){
+                    
+                    // Adiciona um pedaço de parede onde map tem '1'
                     if(map.charAt(i*Consts.NUM_CELLS/2 + j) == '1'){
-                        Wall w = new Wall("wall.png");
+                        Wall w;
+                        
+                        // Desenha o quarto superior esquerdo do mapa
+                        if(level == 0)
+                            w = new Wall("wall.png");
+                        else if(level == 1)
+                            w = new Wall("wall2.png");
+                        else w = new Wall("wall3.png");
+                        
                         w.setPosition(i, j);
                         elemArray.add(w);
                         
-                        w = new Wall("wall.png");
+                        // Desenha o quarto inferior esquerdo do mapa
+                        if(level == 0)
+                            w = new Wall("wall.png");
+                        else if(level == 1)
+                            w = new Wall("wall2.png");
+                        else w = new Wall("wall3.png");
+                        
                         w.setPosition(Consts.NUM_CELLS - 1 - i, j);
                         elemArray.add(w);
                         
-                        w = new Wall("wall.png");
+                        // Desenha o quarto inferior direito do mapa
+                        if(level == 0)
+                            w = new Wall("wall.png");
+                        else if(level == 1)
+                            w = new Wall("wall2.png");
+                        else w = new Wall("wall3.png");
+                        
                         w.setPosition(Consts.NUM_CELLS - 1 - i,Consts.NUM_CELLS - 1 - j);
                         elemArray.add(w);
                         
-                        w = new Wall("wall.png");
+                        // Desenha o quarto superior direito do mapa
+                        if(level == 0)
+                            w = new Wall("wall.png");
+                        else if(level == 1)
+                            w = new Wall("wall2.png");
+                        else w = new Wall("wall3.png");
+                                                
                         w.setPosition(i,Consts.NUM_CELLS - 1 - j);
                         elemArray.add(w);
                     }   
+                    
+                    // Se não for parede, adiciona-se o pacdot
                     else{
                         PacDot p = new PacDot("dot.png");
                         p.setPosition(i, j);
@@ -176,10 +214,15 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
+        
+        // Sistema de progressão de level baseado no número de pacdots na tela
         if(lolo.totalDots == 0){
             level++;
+            if(level > 2)
+                level = 0;
             correctBuggyMap(map[level]);
         }
+        
         this.setTitle("-> Cell: " + lolo.getStringPosition() + "Score: " + lolo.getScore() + "Level: " + level);
         
         g.dispose();
