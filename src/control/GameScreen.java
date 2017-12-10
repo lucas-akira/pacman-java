@@ -22,6 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.Position;
 
 /**
  * Projeto de POO 2017
@@ -31,8 +32,8 @@ import java.util.logging.Logger;
  */
 public class GameScreen extends javax.swing.JFrame implements KeyListener {
     
-    private final Lolo lolo;
-    private final ArrayList<Element> elemArray;
+    private Lolo lolo;
+    private ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
     private int level = 0;
     private int score = 0;
@@ -258,6 +259,18 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             lolo.setCurrentMove(Lolo.MOVE_RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lolo.setMovDirection(Lolo.STOP);
+        } else if (e.getKeyCode() == KeyEvent.VK_T) {
+            Save save = new Save(elemArray, level, lolo);
+            save.SaveFile("Save.dat");
+        } else if (e.getKeyCode() == KeyEvent.VK_Y) {
+            Save load = new Save(elemArray, level, lolo);
+            load.LoadFile("Save.dat");
+            level = load.getLevel();
+            lolo = load.getLolo();
+            lolo.setMovDirection(Lolo.STOP);
+            elemArray.clear();
+            elemArray.addAll(load.getElemArray());
+            elemArray.set(0, lolo);
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
