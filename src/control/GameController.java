@@ -67,7 +67,11 @@ public class GameController {
                     lLolo.addScore(eTemp.getScore());
                 }
                 // Verifica se o elemento é mortal, se sim, mata o pacman
-                // Não implementado ainda
+                if(eTemp.isMortal()){
+                    lLolo.death = true;
+                    System.out.println(lLolo.death);
+                    
+                }
             }
             if(eTemp instanceof Ghost){                
                 ((Ghost) eTemp).ai(e, lLolo, this);
@@ -86,12 +90,6 @@ public class GameController {
         for(int i = 1; i < elemArray.size(); i++){
             elemAux = elemArray.get(i);
             if(elemAux instanceof Ghost){
-                if(elemAux.overlap(elem)){
-                    if(elemAux instanceof Lolo){
-                        lolo.death = true;
-                        System.out.println(lolo.death);
-                    }
-                }
                 continue;
             }
             if(!elemAux.isTransposable())
