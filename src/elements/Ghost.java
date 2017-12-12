@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Ghost extends Element{
     private int contIntervals;
     private int tryMove, lastMove, currentMove;
-    private boolean blue = false;
+    protected boolean blue = false;
     
         public static final int STOP = 0;
         public static final int MOVE_LEFT = 1;
@@ -65,6 +65,29 @@ public class Ghost extends Element{
     
     public void setCurrentMove(int move){
         this.currentMove = move;
+    }
+    
+    public void runAway(ArrayList<Element> e, Lolo lolo, GameController c){
+        if(this.pos.getX() < lolo.getPosition().getX()){
+            this.setMovDirection(MOVE_UP);
+            this.setCurrentMove(MOVE_UP);
+            this.correctBuggyMovement(e, c);
+        }
+        if(this.pos.getX() > lolo.getPosition().getX()){
+            this.setMovDirection(MOVE_DOWN);
+            this.setCurrentMove(MOVE_DOWN);
+            this.correctBuggyMovement(e, c);
+        }
+        if(this.pos.getY() < lolo.getPosition().getY()){
+            this.setMovDirection(MOVE_LEFT);
+            this.setCurrentMove(MOVE_LEFT);
+            this.correctBuggyMovement(e, c);
+        }
+        if(this.pos.getY() > lolo.getPosition().getY()){
+            this.setMovDirection(MOVE_RIGHT);
+            this.setCurrentMove(MOVE_RIGHT);
+            this.correctBuggyMovement(e, c);
+        }
     }
     
     public void correctBuggyMovement(ArrayList<Element> el, GameController c){
