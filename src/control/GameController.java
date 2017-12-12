@@ -1,6 +1,7 @@
 package control;
 
 import elements.Element;
+import control.GameScreen;
 import elements.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class GameController {
     
     Timer timerPoder = new Timer();
     boolean poderAtivado = false;
+    FimPoder f;
     
     // Imprime todos os elementos na tela chamando a função autoDraw de cada um deles.
     // Recebe um arrayList com todos os elementos.
@@ -25,6 +27,7 @@ public class GameController {
         for(int i=0; i<elemArray.size(); i++){
             elemArray.get(i).autoDraw(g);
         }
+        f = new FimPoder(elemArray);
     }
 
     
@@ -38,6 +41,7 @@ public class GameController {
         lLolo.correctBuggyMovement(e, this);
         
         Element eTemp;
+        Ghost eAux;
         
         // Verifica todos os elementos da tela
         for(int i = 1; i < e.size(); i++){
@@ -46,6 +50,12 @@ public class GameController {
             
             // Caso o Pacman esteja sobre o elemento
             if(lLolo.overlap(eTemp)){
+                
+                if(eTemp instanceof Ghost){
+                    if(((Ghost) eTemp).getBlue()){
+                        eTemp.setPosition(9, 9);
+                    }
+                }
                 
                 // Verifica se o elemento é transponível, se sim, passa por cima
                 if(eTemp.isTransposable()){
@@ -56,20 +66,39 @@ public class GameController {
                         lLolo.totalDots--;
                     }
                     
+                    //Se for uma powerpallet (50 pontos), reduz o contador e habilita o poder
                     if(eTemp instanceof PowerPallet){
                         lLolo.totalDots--;
-                        timerPoder.schedule(new FimPoder(), 7000);
+                        timerPoder.schedule(f, 7000);
                         poderAtivado = true;
-                        //FAZ PODER
+                            eAux = (Blinky)e.get(1);
+                            eAux.changeImage("blue-ghost.png");
+                            eAux.setBlue(true);
+                            eAux.setMortal(false);
+                            eAux = (Pinky) e.get(2);
+                            eAux.changeImage("blue-ghost.png");
+                            eAux.setBlue(true);
+                            eAux.setMortal(false);
+                            eAux = (Inky) e.get(3);
+                            eAux.changeImage("blue-ghost.png");
+                            eAux.setBlue(true);
+                            eAux.setMortal(false);
+                            eAux = (Clyde) e.get(4);
+                            eAux.changeImage("blue-ghost.png");
+                            eAux.setBlue(true);
+                            eAux.setMortal(false);
                     }
                     
+                    if(eTemp instanceof Fruit){
+                       ((Fruit) eTemp).isEaten = true;
+                    }
                     // Adiciona o score baseado no tipo de elemento
                     lLolo.addScore(eTemp.getScore());
                 }
                 // Verifica se o elemento é mortal, se sim, mata o pacman
                 if(eTemp.isMortal()){
-                    lLolo.death = true;
-                    System.out.println(lLolo.death);
+                    f.run();
+                    lLolo.pacmanDies(e);
                     
                 }
             }
@@ -100,8 +129,34 @@ public class GameController {
     }
     
     public class FimPoder extends TimerTask{
+        ArrayList<Element> e;
+        Ghost eAux;
+        
+        public FimPoder(ArrayList<Element> e){
+            this.e = e;
+        }
+        
         public void run(){
             poderAtivado = false;
+            eAux = (Blinky) e.get(1);
+            eAux.changeImage("blinky.png");
+            eAux.setBlue(false);
+            eAux.setMortal(true);
+            eAux = (Pinky) e.get(2);
+            eAux.changeImage("pinky.png");
+            eAux.setBlue(false);
+            eAux.setMortal(true);
+            eAux = (Inky) e.get(3);
+            eAux.changeImage("inky.png");
+            eAux.setBlue(false);
+            eAux.setMortal(true);
+            eAux = (Clyde) e.get(4);
+            eAux.changeImage("clyde.png");
+            eAux.setBlue(false);
+            eAux.setMortal(true);
         }
     }
+    
+ 
+    
 }

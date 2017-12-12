@@ -122,4 +122,8 @@ public abstract class Element implements Serializable{
     public boolean isMortal(Element eTemp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void setMortal(boolean tr){
+        this.isMortal = tr;
+    }
 }
