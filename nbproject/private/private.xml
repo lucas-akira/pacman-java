@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/control/GameController.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/elements/PacDot.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/elements/Lolo.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/utils/Position.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/utils/Consts.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/elements/Element.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/control/GameScreen.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/elements/Ghost.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/control/Save.java</file>
-            <file>file:/C:/Users/Guilherme/Documents/GitHub/pacman-java/src/utils/Drawing.java</file>
+            <file>file:/home/tiago/Desktop/PACMAN/pacman-java/src/elements/Wall.java</file>
+            <file>file:/home/tiago/Desktop/PACMAN/pacman-java/src/control/GameScreen.java</file>
+            <file>file:/home/tiago/Desktop/PACMAN/pacman-java/src/control/GameController.java</file>
+            <file>file:/home/tiago/Desktop/PACMAN/pacman-java/src/elements/BackgroundElement.java</file>
+            <file>file:/home/tiago/Desktop/PACMAN/pacman-java/src/control/Main.java</file>
         </group>
     </open-files>
 </project-private>
