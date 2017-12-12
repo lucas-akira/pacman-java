@@ -68,8 +68,7 @@ public class GameController {
                 }
                 // Verifica se o elemento é mortal, se sim, mata o pacman
                 if(eTemp.isMortal()){
-                    lLolo.death = true;
-                    System.out.println(lLolo.death);
+                    lLolo.pacmanDies(e);
                     
                 }
             }
