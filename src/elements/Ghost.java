@@ -6,6 +6,7 @@ import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import utils.Position;
 
 /**
  * Projeto de POO 2017
@@ -17,6 +18,7 @@ public class Ghost extends Element{
     private int contIntervals;
     private int tryMove, lastMove, currentMove;
     protected boolean blue = false;
+    protected boolean returning = false;
     
         public static final int STOP = 0;
         public static final int MOVE_LEFT = 1;
@@ -65,6 +67,27 @@ public class Ghost extends Element{
     
     public void setCurrentMove(int move){
         this.currentMove = move;
+    }
+    
+    public void die(Position pos){
+        if(this.pos.getX() == pos.getX() && this.pos.getY() == pos.getY()){
+            this.returning = false;
+        } else if(this.pos.getX() > pos.getX()){
+            setMovDirection(MOVE_UP);
+            move();
+        }
+        if(this.pos.getX() < pos.getX()){
+            setMovDirection(MOVE_DOWN);
+            move();
+        }
+        if(this.pos.getY() < pos.getY()){
+            setMovDirection(MOVE_RIGHT);
+            move();
+        }
+        if(this.pos.getY() > pos.getY()){
+            setMovDirection(MOVE_LEFT);
+            move();
+        }
     }
     
     public void runAway(ArrayList<Element> e, Lolo lolo, GameController c){
@@ -160,6 +183,14 @@ public class Ghost extends Element{
     
     public void setBlue(boolean blue){
         this.blue = blue;
+    }
+    
+    public boolean getReturning(){
+        return this.returning;
+    }
+    
+    public void setReturning(boolean returning){
+        this.returning = returning;
     }
     
 }

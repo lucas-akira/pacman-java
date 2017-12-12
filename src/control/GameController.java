@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import utils.Position;
 
 /**
  * Projeto de POO 2017
@@ -53,7 +54,21 @@ public class GameController {
                 
                 if(eTemp instanceof Ghost){
                     if(((Ghost) eTemp).getBlue()){
-                        eTemp.setPosition(9, 9);
+                        if(!((Ghost) eTemp).getReturning()){
+                            ((Ghost) eTemp).setReturning(true);
+                            if(eTemp instanceof Blinky){
+                                ((Ghost) eTemp).die(new Position(9,8));
+                            }
+                            if(eTemp instanceof Pinky){
+                                ((Ghost) eTemp).die(new Position(9,9));
+                            }
+                            if(eTemp instanceof Inky){
+                                ((Ghost) eTemp).die(new Position(9,10));
+                            }
+                            if(eTemp instanceof Clyde){
+                                ((Ghost) eTemp).die(new Position(9,11));
+                            }
+                        }
                     }
                 }
                 
@@ -104,8 +119,24 @@ public class GameController {
                     
                 }
             }
-            if(eTemp instanceof Ghost){                
-                ((Ghost) eTemp).ai(e, lLolo, this);
+            if(eTemp instanceof Ghost){
+                if(((Ghost) eTemp).getReturning()){                                          
+                    if(eTemp instanceof Blinky){
+                        ((Ghost) eTemp).die(new Position(9,8));
+                    }
+                    if(eTemp instanceof Pinky){
+                        ((Ghost) eTemp).die(new Position(9,9));
+                    }
+                    if(eTemp instanceof Inky){
+                        ((Ghost) eTemp).die(new Position(9,10));
+                    }
+                    if(eTemp instanceof Clyde){
+                        ((Ghost) eTemp).die(new Position(9,11));
+                    }
+                    
+                } else {
+                    ((Ghost) eTemp).ai(e, lLolo, this);
+                }
             }
             
         }
