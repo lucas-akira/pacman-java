@@ -9,6 +9,7 @@ import elements.Inky;
 import elements.PacDot;
 import elements.Pinky;
 import elements.Wall;
+import java.awt.Color;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -53,7 +54,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         //Cria a janela do tamanho do tabuleiro + insets (bordas) da janela
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
-                     Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
+                     (Consts.NUM_CELLS+1) * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
 
         elemArray = new ArrayList<Element>();
         // Cria o Pacman na posição inicial
@@ -200,7 +201,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
            Trocar essa parte por uma estrutura mais bem organizada
            Utilizando a classe Stage
         */
-        for (int i = 0; i < Consts.NUM_CELLS; i++) {
+        for (int i = 0; i <= Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 try {
                     Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background1.png");
@@ -215,7 +216,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        
+        g2.setColor(Color.WHITE);
+        String temp = "Score: " + lolo.getScore() + " Level: " + level;
+        g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
         // Sistema de progressão de level baseado no número de pacdots na tela
         if(lolo.totalDots == 0){
             level++;

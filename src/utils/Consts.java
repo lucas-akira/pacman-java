@@ -22,6 +22,6 @@ public class Consts {
     
     public static final String PATH = File.separator+"imgs"+File.separator;
     
-    public static final int DELAY = 20;
+    public static final int DELAY = 16;
     public static final int TIMER_FOGO = 40;
 }
