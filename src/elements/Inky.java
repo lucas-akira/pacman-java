@@ -22,5 +22,10 @@ public class Inky extends Ghost{
 	public Inky(String imagename){
 		super(imagename);
 	}
+        
+        @Override
+        public void ai(Lolo lolo){
+          
+        }
 
 }

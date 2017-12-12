@@ -22,6 +22,11 @@ public class Clyde extends Ghost{
         public Clyde(String imagename){
 		super(imagename);
 	}
+        
+        @Override
+        public void ai(Lolo lolo){
+          
+        }
        
 	
 }

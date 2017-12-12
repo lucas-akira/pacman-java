@@ -18,5 +18,10 @@ public class Pinky extends Ghost{
 	public Pinky(String imagename){
 		super(imagename);
 	}
+        
+        @Override
+        public void ai(Lolo lolo){
+          
+        }
 	
 }

@@ -44,4 +44,9 @@ public class Blinky extends Ghost{
 	public Blinky(String imagename){
 		super(imagename);
 	}
+        
+        @Override
+        public void ai(Lolo lolo){
+          
+        }
 }
