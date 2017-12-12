@@ -274,6 +274,12 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             elemArray.clear();
             elemArray.addAll(load.getElemArray());
             elemArray.set(0, lolo);
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            //Cheat para testes, para pular de level
+            level += 1;
+            if (level > 2)
+                level = 0;
+            this.correctBuggyMap(map[level]);
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
