@@ -12,7 +12,7 @@ import utils.Drawing;
  *
  * @author tiago
  */
-public class Wall extends BackgroundElement{
+public class Wall extends Element{
 
     public Wall(String imageName) {
         super(imageName);
