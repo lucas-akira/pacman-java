@@ -27,4 +27,12 @@ public class Consts {
     
     public static final int DELAY = 16;
     public static final int TIMER_FOGO = 40;
+    
+    public static final int CHERRY_TEMPO_INICIO = 50000;
+    public static final int CHERRY_TEMPO_FIM = 15000;
+    public static final int CHERRY_SCORE = 100;
+    
+    public static final int STRAWBERRY_TEMPO_INICIO = 75000;
+    public static final int STRAWBERRY_TEMPO_FIM = 15000;
+    public static final int STRAWBERRY_SCORE = 300;
 }

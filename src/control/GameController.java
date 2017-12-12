@@ -69,7 +69,9 @@ public class GameController {
                     //Se for uma powerpallet (50 pontos), reduz o contador e habilita o poder
                     if(eTemp instanceof PowerPallet){
                         lLolo.totalDots--;
-                        timerPoder.schedule(f, 7000);
+                        timerPoder.cancel();
+                        timerPoder = new Timer();
+                        timerPoder.schedule(new FimPoder(e), 7000);
                         poderAtivado = true;
                             eAux = (Blinky)e.get(1);
                             eAux.changeImage("blue-ghost.png");
