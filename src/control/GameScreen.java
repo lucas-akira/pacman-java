@@ -58,6 +58,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         map[0] = "1111111111130000000110111011011000000000101110101110000010011111101101222210100122221000222222101100";
         map[1] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
+        //map[3] = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         
         //Cria a janela do tamanho do tabuleiro + insets (bordas) da janela
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
@@ -413,5 +414,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+    
+    public void setLevel(int level){
+        this.level = level;
     }
 }

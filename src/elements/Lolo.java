@@ -20,6 +20,7 @@ public class Lolo extends Element  implements Serializable{
     public static final int MOVE_UP = 3;
     public static final int MOVE_DOWN = 4;
     
+    private int lives = 3;
     private int movDirection = STOP;
     private int tryMove, lastMove, currentMove; // Variáveis para controlar a movimentação
     public int totalDots = 0;   // Variável para contar o total de dots na tela
@@ -130,6 +131,31 @@ public class Lolo extends Element  implements Serializable{
         this.currentMove = move;
     }
     
+    public void pacmanDies(ArrayList<Element> elements){
+        Element elemAux;
+        
+        this.lives--;
+        if(this.lives < 0){
+            endGame(elements);
+            return;
+        }
+        this.setPosition(13,10);
+        this.setMovDirection(STOP);
+        
+        elemAux = (Blinky) elements.get(1);
+        elemAux.setPosition(9,8);
+        
+        elemAux = (Pinky) elements.get(2);
+        elemAux.setPosition(9, 9);
+        
+        elemAux = (Inky) elements.get(3);
+        elemAux.setPosition(9, 10);
+        
+        elemAux = (Clyde) elements.get(4);
+        elemAux.setPosition(9, 11);
+        
+    }
+    
     public void move() {
         switch (movDirection) {
             case MOVE_LEFT:
@@ -147,5 +173,9 @@ public class Lolo extends Element  implements Serializable{
             default:
                 break;
         }
+    }
+    
+    private void endGame(ArrayList<Element> elements){
+        elements.clear();
     }
 }

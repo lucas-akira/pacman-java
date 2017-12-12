@@ -1,8 +1,10 @@
 package elements;
 
+import control.GameController;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import utils.Position;
 
 // Igual ao blinky para distância menor que D, aleatório depois
@@ -24,7 +26,7 @@ public class Clyde extends Ghost{
 	}
         
         @Override
-        public void ai(Lolo lolo){
+        public void ai(ArrayList<Element> e, Lolo loll, GameController c){
           
         }
        
