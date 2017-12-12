@@ -4,6 +4,8 @@ import elements.Element;
 import elements.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Projeto de POO 2017
@@ -12,6 +14,9 @@ import java.util.ArrayList;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class GameController {
+    
+    Timer timerPoder = new Timer();
+    boolean poderAtivado = false;
     
     // Imprime todos os elementos na tela chamando a função autoDraw de cada um deles.
     // Recebe um arrayList com todos os elementos.
@@ -51,6 +56,13 @@ public class GameController {
                         lLolo.totalDots--;
                     }
                     
+                    if(eTemp instanceof PowerPallet){
+                        lLolo.totalDots--;
+                        timerPoder.schedule(new FimPoder(), 7000);
+                        poderAtivado = true;
+                        //FAZ PODER
+                    }
+                    
                     // Adiciona o score baseado no tipo de elemento
                     lLolo.addScore(eTemp.getScore());
                 }
@@ -74,5 +86,11 @@ public class GameController {
                     return false;
         }        
         return true;
+    }
+    
+    public class FimPoder extends TimerTask{
+        public void run(){
+            poderAtivado = false;
+        }
     }
 }
