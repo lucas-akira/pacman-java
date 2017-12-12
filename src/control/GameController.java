@@ -57,6 +57,9 @@ public class GameController {
                 // Verifica se o elemento é mortal, se sim, mata o pacman
                 // Não implementado ainda
             }
+            if(eTemp instanceof Ghost){                
+                ((Ghost) eTemp).ai(e, lLolo, this);
+            }
             
         }
         
@@ -67,8 +70,18 @@ public class GameController {
     // para determinar se a posição onde ele está é válida para o Pacman
     public boolean isValidPosition(ArrayList<Element> elemArray, Element elem){
         Element elemAux;
+        Lolo lolo = (Lolo) elemArray.get(0);
         for(int i = 1; i < elemArray.size(); i++){
-            elemAux = elemArray.get(i);            
+            elemAux = elemArray.get(i);
+            if(elemAux instanceof Ghost){
+                if(elemAux.overlap(elem)){
+                    if(elemAux instanceof Lolo){
+                        lolo.death = true;
+                        System.out.println(lolo.death);
+                    }
+                }
+                continue;
+            }
             if(!elemAux.isTransposable())
                 if(elemAux.overlap(elem))
                     return false;

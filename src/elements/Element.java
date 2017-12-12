@@ -118,4 +118,8 @@ public abstract class Element implements Serializable{
     public int getScore(){
         return this.score;
     }
+
+    public boolean isMortal(Element eTemp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

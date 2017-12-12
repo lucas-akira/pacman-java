@@ -20,6 +20,7 @@ public class Lolo extends Element  implements Serializable{
     public static final int MOVE_UP = 3;
     public static final int MOVE_DOWN = 4;
     
+    public boolean death = false;
     private int movDirection = STOP;
     private int tryMove, lastMove, currentMove; // Variáveis para controlar a movimentação
     public int totalDots = 0;   // Variável para contar o total de dots na tela
