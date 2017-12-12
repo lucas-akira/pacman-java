@@ -1,6 +1,7 @@
 package control;
 
 import elements.Element;
+import control.GameScreen;
 import elements.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class GameController {
                         lLolo.totalDots--;
                     }
                     
+                    //Se for uma powerpallet (50 pontos), reduz o contador e habilita o poder
                     if(eTemp instanceof PowerPallet){
                         lLolo.totalDots--;
                         timerPoder.schedule(new FimPoder(), 7000);
@@ -63,6 +65,9 @@ public class GameController {
                         //FAZ PODER
                     }
                     
+                    if(eTemp instanceof Fruit){
+                       ((Fruit) eTemp).isEaten = true;
+                    }
                     // Adiciona o score baseado no tipo de elemento
                     lLolo.addScore(eTemp.getScore());
                 }
@@ -93,4 +98,7 @@ public class GameController {
             poderAtivado = false;
         }
     }
+    
+ 
+    
 }

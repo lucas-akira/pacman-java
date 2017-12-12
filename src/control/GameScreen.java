@@ -41,6 +41,10 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private int level = 0;
     private int score = 0;
     private String[] map = new String[3];
+    Timer timerCherry = new Timer();
+    Timer timerStrawberry = new Timer();
+    Fruit cherry = new Fruit("cherry.png", 150, timerCherry);
+    Fruit strawberry = new Fruit("strawberry.png", 150, timerStrawberry);
 
     public GameScreen() {
         Drawing.setGameScreen(this);
@@ -51,7 +55,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         // Declaração dos três mapas de jogo
         // Cada variável representa 1/4 do mapa total, e é refletida para formar o mapa de modo simétrico
         //map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
-        map[0]  = "1111111111130000000110111011011000000000101110101110000010011111101101222210100122221000222222101100";
+        map[0] = "1111111111130000000110111011011000000000101110101110000010011111101101222210100122221000222222101100";
         map[1] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         
@@ -204,6 +208,14 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                 }
             }
         }
+
+        timerCherry.cancel();
+        timerCherry = new Timer();
+        timerCherry.schedule(new InicioCherry(), 5000);
+        
+        timerStrawberry.cancel();
+        timerStrawberry = new Timer();
+        timerStrawberry.schedule(new InicioStrawberry(), 5000);
     }
     
     public final void addElement(Element elem) {
@@ -220,6 +232,19 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         /*Criamos um contexto grafico*/
         Graphics g2 = g.create(getInsets().right, getInsets().top, getWidth() - getInsets().left, getHeight() - getInsets().bottom);
+        
+        if(cherry.isEaten){
+            cherry.isEaten = false;
+            timerCherry.cancel();
+            timerCherry = new Timer();
+            timerCherry.schedule(new InicioCherry(), 100);
+        }
+        if(strawberry.isEaten){
+            strawberry.isEaten = false;
+            timerStrawberry.cancel();
+            timerStrawberry = new Timer();
+            timerStrawberry.schedule(new InicioStrawberry(), 100);
+        }
         
         /* DESENHA CENARIO
            Trocar essa parte por uma estrutura mais bem organizada
@@ -305,6 +330,50 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+    }
+    
+    public class InicioCherry extends TimerTask{
+        public void run(){
+            cherry = new Fruit("cherry.png", 150, timerCherry);
+            do{
+                cherry.setPosition((int)(Math.random()*Consts.NUM_CELLS), (int)(Math.random()*Consts.NUM_CELLS));
+            }while(!controller.isValidPosition(elemArray, cherry));
+            elemArray.add(cherry);
+            timerCherry.schedule(new FimCherry(cherry), 5000);
+        }
+    }
+    public class FimCherry extends TimerTask{
+        Fruit cherry;
+        public FimCherry(Fruit cherry){
+            super();
+            this.cherry = cherry;
+        }
+        public void run(){
+            elemArray.remove(cherry);
+            timerCherry.schedule(new InicioCherry(), 5000);
+        }
+    }
+    
+    public class InicioStrawberry extends TimerTask{
+        public void run(){
+            strawberry = new Fruit("strawberry.png", 150, timerStrawberry);
+            do{
+                strawberry.setPosition((int)(Math.random()*Consts.NUM_CELLS), (int)(Math.random()*Consts.NUM_CELLS));
+            }while(!controller.isValidPosition(elemArray, strawberry));
+            elemArray.add(strawberry);
+            timerStrawberry.schedule(new FimStrawberry(strawberry), 5000);
+        }
+    }
+    public class FimStrawberry extends TimerTask{
+        Fruit strawberry;
+        public FimStrawberry(Fruit strawberry){
+            super();
+            this.strawberry = strawberry;
+        }
+        public void run(){
+            elemArray.remove(strawberry);
+            timerStrawberry.schedule(new InicioStrawberry(), 5000);
+        }
     }
     
     /**
