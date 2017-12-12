@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Ghost extends Element{
     private int contIntervals;
     private int tryMove, lastMove, currentMove;
+    private boolean blue = false;
     
         public static final int STOP = 0;
         public static final int MOVE_LEFT = 1;
@@ -129,4 +130,13 @@ public class Ghost extends Element{
                 break;
         }
     }
+    
+    public boolean getBlue(){
+        return this.blue;
+    }
+    
+    public void setBlue(boolean blue){
+        this.blue = blue;
+    }
+    
 }
