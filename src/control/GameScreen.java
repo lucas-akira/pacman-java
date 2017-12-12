@@ -5,9 +5,11 @@ import elements.Clyde;
 //import elements.Skull;
 import elements.Lolo;
 import elements.Element;
+import elements.Fruit;
 import elements.Inky;
 import elements.PacDot;
 import elements.Pinky;
+import elements.PowerPallet;
 import elements.Wall;
 import java.awt.Color;
 import utils.Consts;
@@ -48,7 +50,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         // Declaração dos três mapas de jogo
         // Cada variável representa 1/4 do mapa total, e é refletida para formar o mapa de modo simétrico
-        map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
+        //map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
+        map[0]  = "1111111111130000000110111011011000000000101110101110000010011111101101222210100122221000222222101100";
         map[1] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
         
@@ -155,7 +158,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     }   
                     
                     // Se não for parede, adiciona-se o pacdot
-                    else{
+                    else if (map.charAt(i*Consts.NUM_CELLS/2 + j) == '0'){
                         PacDot p = new PacDot("dot.png");
                         p.setPosition(i, j);
                         elemArray.add(p);
@@ -175,7 +178,28 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                         p.setPosition(i,Consts.NUM_CELLS - 1 - j);
                         elemArray.add(p);
                         lolo.totalDots++;
-                     }
+                    }
+                    else if ((map.charAt(i*Consts.NUM_CELLS/2 + j) == '3')){
+                        PowerPallet pp = new PowerPallet("powerpallet.png");
+                        pp.setPosition(i, j);
+                        elemArray.add(pp);
+                        lolo.totalDots++;
+                        
+                        pp = new PowerPallet("powerpallet.png");
+                        pp.setPosition(Consts.NUM_CELLS - 1 - i, j);
+                        elemArray.add(pp);
+                        lolo.totalDots++;
+                        
+                        pp = new PowerPallet("powerpallet.png");
+                        pp.setPosition(Consts.NUM_CELLS - 1 - i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(pp);
+                        lolo.totalDots++;
+                        
+                        pp = new PowerPallet("powerpallet.png");
+                        pp.setPosition(i,Consts.NUM_CELLS - 1 - j);
+                        elemArray.add(pp);
+                        lolo.totalDots++;
+                    }
                      
                 }
             }
@@ -217,10 +241,11 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
         g2.setColor(Color.WHITE);
-        String temp = "Score: " + lolo.getScore() + " Level: " + level;
+        String temp = "Score: " + lolo.getScore() + " Level: " + level + " Poder: " + controller.poderAtivado;
         g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
         // Sistema de progressão de level baseado no número de pacdots na tela
         if(lolo.totalDots == 0){
+            controller.poderAtivado = false;
             level++;
             if(level > 2)
                 level = 0;
