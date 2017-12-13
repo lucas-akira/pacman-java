@@ -158,16 +158,16 @@ public class Lolo extends Element  implements Serializable{
         this.setMovDirection(STOP);
         
         elemAux = (Blinky) elements.get(1);
-        elemAux.setPosition(9,8);
+        elemAux.setPosition(10,8);
         
         elemAux = (Pinky) elements.get(2);
-        elemAux.setPosition(9, 9);
+        elemAux.setPosition(10, 9);
         
         elemAux = (Inky) elements.get(3);
-        elemAux.setPosition(9, 10);
+        elemAux.setPosition(10, 10);
         
         elemAux = (Clyde) elements.get(4);
-        elemAux.setPosition(9, 11);
+        elemAux.setPosition(10, 11);
         
     }
     
