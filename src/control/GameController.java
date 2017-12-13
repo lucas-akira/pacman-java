@@ -27,7 +27,12 @@ public class GameController {
         for(int i=0; i<elemArray.size(); i++){
             elemArray.get(i).autoDraw(g);
         }
+        if(elemArray.size() >= 5){
+            for(int i = 1; i < 5; i++)
+                elemArray.get(i).autoDraw(g);
+        }
         f = new FimPoder(elemArray);
+        
     }
 
     
