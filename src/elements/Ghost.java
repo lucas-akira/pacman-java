@@ -72,6 +72,19 @@ public class Ghost extends Element{
     public void die(Position pos){
         if(this.pos.getX() == pos.getX() && this.pos.getY() == pos.getY()){
             this.returning = false;
+            System.out.println("Cheguei na minha casa");
+            if(this.blue){
+                this.changeImage("blue-ghost.png");
+            } else {
+                if(this instanceof Blinky)
+                    this.changeImage("blinky.png");
+                else if(this instanceof Pinky)
+                    this.changeImage("pinky.png");
+                else if(this instanceof Inky)
+                    this.changeImage("inky.png");
+                else if(this instanceof Clyde)
+                    this.changeImage("clyde.png");
+            }
         } else if(this.pos.getX() > pos.getX()){
             setMovDirection(MOVE_UP);
             move();

@@ -60,10 +60,10 @@ public class GameController {
                 if(eTemp instanceof Ghost){
                     if(((Ghost) eTemp).getBlue()){
                         if(!((Ghost) eTemp).getReturning()){
+                            eTemp.changeImage("eyes.png");
                             lLolo.addScore(100 * (int)Math.pow(2, lLolo.getKillStreak()));
                             if(lLolo.getKillStreak() < 4){
                                 lLolo.addKillStreak(1);
-                                System.out.println("Kill Streak: " + lLolo.getKillStreak());
                             }
                             ((Ghost) eTemp).setReturning(true);
                             if(eTemp instanceof Blinky){
@@ -136,19 +136,15 @@ public class GameController {
                 if(((Ghost) eTemp).getReturning()){                                          
                     if(eTemp instanceof Blinky){
                         ((Ghost) eTemp).die(new Position(10,8));
-                        eTemp.changeImage("eyes.png");
                     }
-                    if(eTemp instanceof Pinky){
+                    else if(eTemp instanceof Pinky){
                         ((Ghost) eTemp).die(new Position(10,9));
-                        eTemp.changeImage("eyes.png");
                     }
-                    if(eTemp instanceof Inky){
+                    else if(eTemp instanceof Inky){
                         ((Ghost) eTemp).die(new Position(10,10));
-                        eTemp.changeImage("eyes.png");
                     }
-                    if(eTemp instanceof Clyde){
+                    else if(eTemp instanceof Clyde){
                         ((Ghost) eTemp).die(new Position(10,11));
-                        eTemp.changeImage("eyes.png");
                     }
                     
                 } else {
