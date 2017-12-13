@@ -50,22 +50,22 @@ public class Pinky extends Ghost {
                     this.setCurrentMove(MOVE_DOWN);
                     //                        this.setTryMove(MOVE_DOWN);
                     this.correctBuggyMovement(e, c);
-                }
-            } else{
-                 int rand;
-                    do {
-                        rand = (int) Math.round(Math.random() * 4);
+                }                
+            } else {
+                int rand;
+                do {
+                    rand = (int) Math.round(Math.random() * 4);
 
-                    } while (((rand == MOVE_LEFT && lastMove == MOVE_RIGHT)
-                            || (rand == MOVE_RIGHT && lastMove == MOVE_LEFT)
-                            || (rand == MOVE_UP && lastMove == MOVE_DOWN)
-                            || (rand == MOVE_DOWN && lastMove == MOVE_UP)));
-                    //                  this.setMovDirection(rand);
-                    //                   this.setCurrentMove(rand);
+                } while (((rand == MOVE_LEFT && lastMove == MOVE_RIGHT)
+                        || (rand == MOVE_RIGHT && lastMove == MOVE_LEFT)
+                        || (rand == MOVE_UP && lastMove == MOVE_DOWN)
+                        || (rand == MOVE_DOWN && lastMove == MOVE_UP)));
+                //                  this.setMovDirection(rand);
+                //                   this.setCurrentMove(rand);
 
-                    this.setTryMove(rand);
-                    this.correctBuggyMovement(e, c);
-                
+                this.setTryMove(rand);
+                this.correctBuggyMovement(e, c);
+
             }
         }
     }

@@ -1,5 +1,6 @@
 package elements;
 
+import com.sun.org.apache.bcel.internal.generic.GotoInstruction;
 import control.GameController;
 import static elements.Lolo.STOP;
 import utils.Consts;
@@ -104,26 +105,41 @@ public class Ghost extends Element{
     }
     
     public void runAway(ArrayList<Element> e, Lolo lolo, GameController c){
-        if(dist((this.pos.getX() - lolo.getPosition().getX()), (this.pos.getY() - lolo.getPosition().getY())) < 6){
+        if(dist((this.pos.getX() - lolo.getPosition().getX()), (this.pos.getY() - lolo.getPosition().getY())) < Consts.IA_RUN_AWAY_DIST){
             if(this.pos.getX() < lolo.getPosition().getX()){
                 this.setMovDirection(MOVE_UP);
                 this.setCurrentMove(MOVE_UP);
                 this.correctBuggyMovement(e, c);
             }
-            if(this.pos.getX() > lolo.getPosition().getX()){
+            else if(this.pos.getX() > lolo.getPosition().getX()){
                 this.setMovDirection(MOVE_DOWN);
                 this.setCurrentMove(MOVE_DOWN);
                 this.correctBuggyMovement(e, c);
             }
-            if(this.pos.getY() < lolo.getPosition().getY()){
+            else if(this.pos.getY() < lolo.getPosition().getY()){
                 this.setMovDirection(MOVE_LEFT);
                 this.setCurrentMove(MOVE_LEFT);
                 this.correctBuggyMovement(e, c);
             }
-            if(this.pos.getY() > lolo.getPosition().getY()){
+            else if(this.pos.getY() > lolo.getPosition().getY()){
                 this.setMovDirection(MOVE_RIGHT);
                 this.setCurrentMove(MOVE_RIGHT);
                 this.correctBuggyMovement(e, c);
+            }
+            else {
+                int rand;
+            do{
+                rand = (int) Math.round(Math.random()*4);
+
+            }while(((rand == MOVE_LEFT && lastMove == MOVE_RIGHT)
+                ||(rand == MOVE_RIGHT && lastMove == MOVE_LEFT)
+                ||(rand == MOVE_UP && lastMove == MOVE_DOWN)
+                ||(rand == MOVE_DOWN && lastMove == MOVE_UP)));
+//                  this.setMovDirection(rand);
+//                   this.setCurrentMove(rand);
+
+            this.setTryMove(rand);
+            this.correctBuggyMovement(e, c);
             }
         } else {
             int rand;
