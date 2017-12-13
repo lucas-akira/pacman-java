@@ -56,8 +56,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         // Cada variável representa 1/4 do mapa total, e é refletida para formar o mapa de modo simétrico
         //map[0] = "1111111111100001000010110101111011000001100101110111010100011000010001101111011110100000001000111011";
         map[0] = "1111111111130000000110111011011000000000101110101110000010011111101101222210110122221000222222101100";
-        map[1] = "1111111111130001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
-        map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010111011";
+        map[1] = "1111111111130001000010110101111011000001100101110111010101011000010001101111011110100000001010110111";
+        map[2] = "1111111111100001000010110101111011000001100101110111010101011000010001101111011110100000001010110111";
         //map[3] = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         
         //Cria a janela do tamanho do tabuleiro + insets (bordas) da janela
@@ -85,23 +85,43 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         // Cria os fantasmas e adiciona eles na tela
         Blinky blinky = new Blinky("blinky.png");
-        blinky.setPosition(9,8);
+        blinky.setPosition(10,8);
         this.addElement(blinky);
 
         Pinky pinky = new Pinky("pinky.png");
-        pinky.setPosition(9,9);
+        pinky.setPosition(10,9);
         this.addElement(pinky);
 
         Inky inky = new Inky("inky.png");
-        inky.setPosition(9,10);
+        inky.setPosition(10,10);
         this.addElement(inky);
 
         Clyde clyde = new Clyde("clyde.png");
-        clyde.setPosition(9,11);
+        clyde.setPosition(10,11);
         this.addElement(clyde);
        
         
         // Adiciona os PacDots
+        
+        
+        Wall w;
+        for(int i = 7; i < 13; i++){
+            if(level == 0)
+                w = new Wall("wall.png");
+            else if(level == 1)
+                w = new Wall("wall2.png");
+            else w = new Wall("wall3.png");
+            w.setPosition(11, i); elemArray.add(w);
+        }
+        for(int i = 9; i < 11; i++){
+            if(level == 0)
+                w = new Wall("wall.png");
+            else if(level == 1)
+                w = new Wall("wall2.png");
+            else w = new Wall("wall3.png");
+            w.setPosition(9, i); elemArray.add(w);
+        }
+
         
         // Para cada elemento da tela, verifica se é uma posição válida
         for (int i = 0; i < Consts.NUM_CELLS/2; i++) {
@@ -119,7 +139,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     
                     // Adiciona um pedaço de parede onde map tem '1'
                     if(map.charAt(i*Consts.NUM_CELLS/2 + j) == '1'){
-                        Wall w;
+             
                         
                         // Desenha o quarto superior esquerdo do mapa
                         if(level == 0)
@@ -160,7 +180,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                                                 
                         w.setPosition(i,Consts.NUM_CELLS - 1 - j);
                         elemArray.add(w);
-                    }   
+                    }
+                    
                     
                     // Se não for parede, adiciona-se o pacdot
                     else if (map.charAt(i*Consts.NUM_CELLS/2 + j) == '0'){
