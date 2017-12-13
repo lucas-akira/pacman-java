@@ -157,7 +157,13 @@ public class GameController {
             }
             
         }
-        
+        // Verifica se ganha vida extra
+        if (lLolo.getScore() >= lLolo.getExtraLivesFactor()) {
+            // Adiciona uma vida extra
+            lLolo.addLife(1);
+            // A proxima vida é adicionada somente apos mais 10000 pontos
+            lLolo.addExtraLivesFactor(10000);
+        }
         lLolo.move();
     }
 

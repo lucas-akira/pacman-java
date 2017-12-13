@@ -21,10 +21,19 @@ public class Lolo extends Element  implements Serializable{
     public static final int MOVE_DOWN = 4;
     
     private int lives = 3;
+    private int extraLivesFactor = 10000;
     private int movDirection = STOP;
     private int tryMove, lastMove, currentMove; // Variáveis para controlar a movimentação
     public int totalDots = 0;   // Variável para contar o total de dots na tela
     private int killStreak = 0; // Variável para contar quantos fantasmas matou sob efeito de uma power pellet
+    
+    public int getExtraLivesFactor() {
+        return extraLivesFactor;
+    }
+    
+    public void addExtraLivesFactor(int addition) {
+        this.extraLivesFactor += addition;
+    }
 
     public void setKillStreak(int killStreak) {
         this.killStreak = killStreak;
@@ -144,7 +153,13 @@ public class Lolo extends Element  implements Serializable{
         this.currentMove = move;
     }
     
-    public int getLife() { return lives; }
+    public int getLife() { 
+        return lives; 
+    }
+    
+    public void addLife(int lives) {
+        this.lives += lives;
+    }
     
     public void pacmanDies(ArrayList<Element> elements){
         Element elemAux;

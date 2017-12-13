@@ -368,6 +368,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             //Cheat para testes, para pular de level
             lolo.totalDots=0;
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            lolo.addScore(100);
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
