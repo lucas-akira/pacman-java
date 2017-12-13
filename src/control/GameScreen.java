@@ -57,9 +57,15 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             if(stage.getLevel() > 2)
                 stage.setLevel(0);
             stage.runStage();
+        } 
+        if (stage.getController().gameOver == true) {
+            stage.setLevel(3);
+            stage.getController().gameOver = false;
+            stage.runStage();
         }
         
-        this.setTitle("-> Cell: " + stage.getLolo().getStringPosition() + "Score: " + stage.getLolo().getScore() + "Level: " + stage.getLevel());
+        //this.setTitle("-> Cell: " + stage.getLolo().getStringPosition() + "Score: " + stage.getLolo().getScore() + "Level: " + stage.getLevel());
+        this.setTitle("Pacman Grupo 6");
     }
     
     public void go() {

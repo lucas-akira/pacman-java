@@ -26,6 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import utils.Consts;
 
 /**
@@ -53,7 +54,7 @@ public class Stage {
     public Stage() {
         // Inicializa os atributos
         controller = new GameController();
-        map = new String[3];
+        map = new String[4];
         timerCherry = new Timer();
         timerStrawberry = new Timer();
         cherry = new Fruit("cherry.png", Consts.CHERRY_SCORE, timerCherry);
@@ -73,12 +74,12 @@ public class Stage {
         map[0] = "1111111111130000000110111011011000000000101110101110000010011111100101222211010122221000222222101100";
         map[1] = "1111111111130001000010110101111011000001100101110111010111011000010001101111011110000000001010110111";
         map[2] = "1111111111100001000010110101111011000001100101110111010111011000010001101111011110000000001010110111";
-        //map[3] = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        // Mapa de Game Over
+        map[3] = "2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222";
     }
     public void runStage() {
         // Limpa o array de elementos 
         elemArray.clear();
-        
         // Adiciona os elementos em elemArray
         addElements();
         // Configura os timers
@@ -105,7 +106,7 @@ public class Stage {
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
         g2.setColor(Color.WHITE);
-        String temp = "Score: " + lolo.getScore() + " Level: " + level + " Poder: " + controller.poderAtivado + " Vidas: " + lolo.getLife();
+        String temp = "Score: " + lolo.getScore() + " Level: " + (level+1) + " Poder: " + controller.poderAtivado + " Vidas: " + lolo.getLife();
         g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
         g.dispose();
         g2.dispose();
@@ -130,38 +131,42 @@ public class Stage {
     }
 
     private void addElements() {
-        // Coloca o Pacman e os fantasmas na posição inicial
-        lolo.setPosition(13, 10);
-        blinky.setPosition(10, 8);
-        pinky.setPosition(10, 9);
-        inky.setPosition(10, 10);
-        clyde.setPosition(10, 11);
-
-        // Adiciona-os no array de elementos
-        elemArray.add(lolo);
-        elemArray.add(blinky);
-        elemArray.add(pinky);
-        elemArray.add(inky);
-        elemArray.add(clyde);
         
-
         Wall wall;
-        // Adiciona as paredes extras sem simetria
-        for (int i = 7; i < 13; i++) {
-            // Seleciona qual parede usar de acordo com o level
-            wall = selectWall(level);
-            wall.setPosition(11, i);
-            elemArray.add(wall);
-        }
-        for (int i = 9; i < 11; i++) {
-            wall = selectWall(level);
-            wall.setPosition(9, i);
-            elemArray.add(wall);
-        }
-        for (int i = 0; i < 2; i++) {
-            wall = selectWall(level);
-            wall.setPosition(12, 8 + 3 * i);
-            elemArray.add(wall);
+        if (level != 3) {
+            // Coloca o Pacman e os fantasmas na posição inicial
+            lolo.setPosition(13, 10);
+            blinky.setPosition(10, 8);
+            pinky.setPosition(10, 9);
+            inky.setPosition(10, 10);
+            clyde.setPosition(10, 11);
+
+            // Adiciona-os no array de elementos
+            elemArray.add(lolo);
+            elemArray.add(blinky);
+            elemArray.add(pinky);
+            elemArray.add(inky);
+            elemArray.add(clyde);
+
+
+
+            // Adiciona as paredes extras sem simetria
+            for (int i = 7; i < 13; i++) {
+                // Seleciona qual parede usar de acordo com o level
+                wall = selectWall(level);
+                wall.setPosition(11, i);
+                elemArray.add(wall);
+            }
+            for (int i = 9; i < 11; i++) {
+                wall = selectWall(level);
+                wall.setPosition(9, i);
+                elemArray.add(wall);
+            }
+            for (int i = 0; i < 2; i++) {
+                wall = selectWall(level);
+                wall.setPosition(12, 8 + 3 * i);
+                elemArray.add(wall);
+            }            
         }
         
         // Para cada elemento da tela, verifica se é uma posição válida

@@ -19,6 +19,7 @@ public class GameController {
     
     Timer timerPoder = new Timer();
     boolean poderAtivado = false;
+    boolean gameOver = false;
     FimPoder f;
     
     // Imprime todos os elementos na tela chamando a função autoDraw de cada um deles.
@@ -133,6 +134,9 @@ public class GameController {
                 if(eTemp.isMortal()){
                     f.run();
                     lLolo.pacmanDies(e);
+                    if (lLolo.getLife() < 0) {
+                        gameOver = true;
+                    }
                     
                 }
             }

@@ -1,6 +1,7 @@
 package elements;
 
 import control.GameController;
+import control.Stage;
 import utils.Drawing;
 import java.awt.Graphics;
 import java.io.Serializable;
@@ -165,10 +166,6 @@ public class Lolo extends Element  implements Serializable{
         Element elemAux;
         
         this.lives--;
-        if(this.lives < 0){
-            endGame(elements);
-            return;
-        }
         this.setPosition(13,10);
         this.setMovDirection(STOP);
         
@@ -203,9 +200,5 @@ public class Lolo extends Element  implements Serializable{
             default:
                 break;
         }
-    }
-    
-    private void endGame(ArrayList<Element> elements){
-        elements.clear();
     }
 }
