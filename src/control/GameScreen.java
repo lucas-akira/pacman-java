@@ -316,17 +316,24 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lolo.setMovDirection(Lolo.STOP);
         } else if (e.getKeyCode() == KeyEvent.VK_T) {
-            Save save = new Save(elemArray, level, lolo);
+            Save save = new Save(elemArray, level, lolo, controller.poderAtivado);
             save.SaveFile("Save.dat");
         } else if (e.getKeyCode() == KeyEvent.VK_Y) {
-            Save load = new Save(elemArray, level, lolo);
+            Save load = new Save(elemArray, level, lolo, controller.poderAtivado);
             load.LoadFile("Save.dat");
             level = load.getLevel();
             lolo = load.getLolo();
             lolo.setMovDirection(Lolo.STOP);
+            //controller.timerPoder = load.getTimerPoder();
             elemArray.clear();
             elemArray.addAll(load.getElemArray());
             elemArray.set(0, lolo);
+            controller.poderAtivado = load.getIsPoderAtivo();
+            if(controller.poderAtivado){
+                controller.timerPoder.cancel();
+                controller.timerPoder = new Timer();
+                controller.timerPoder.schedule(controller.new FimPoder(elemArray), 7000);
+            }
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             //Cheat para testes, para pular de level
             lolo.totalDots=0;
