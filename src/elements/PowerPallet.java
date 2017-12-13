@@ -1,10 +1,6 @@
 package elements;
 
-import utils.Consts;
-import utils.Drawing;
-import java.awt.Graphics;
-
-public class PowerPallet extends Element {
+public class PowerPallet extends BackgroundElement  {
 	
 
 	public PowerPallet(String imagename){
@@ -13,8 +9,10 @@ public class PowerPallet extends Element {
                 this.score = 50;
 	}
         
+        /*
         @Override
-        public void autoDraw(Graphics g){
+        public void autoDraw(Graphics g) {
             Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
         }
+        */
 }
