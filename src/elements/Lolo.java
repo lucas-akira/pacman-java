@@ -24,7 +24,20 @@ public class Lolo extends Element  implements Serializable{
     private int movDirection = STOP;
     private int tryMove, lastMove, currentMove; // Variáveis para controlar a movimentação
     public int totalDots = 0;   // Variável para contar o total de dots na tela
-     
+    private int killStreak = 0; // Variável para contar quantos fantasmas matou sob efeito de uma power pellet
+
+    public void setKillStreak(int killStreak) {
+        this.killStreak = killStreak;
+    }
+
+    public int getKillStreak() {
+        return killStreak;
+    }
+
+    public void addKillStreak(int addAmount) {
+        this.killStreak += addAmount;
+    }
+   
     public Lolo(String imageName) {
         super(imageName);
     }
