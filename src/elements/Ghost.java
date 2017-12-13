@@ -1,6 +1,5 @@
 package elements;
 
-import com.sun.org.apache.bcel.internal.generic.GotoInstruction;
 import control.GameController;
 import static elements.Lolo.STOP;
 import utils.Consts;
