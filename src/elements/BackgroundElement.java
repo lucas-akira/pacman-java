@@ -4,22 +4,23 @@
  * and open the template in the editor.
  */
 package elements;
+
+import java.awt.Graphics;
+import utils.Drawing;
+
 /**
  *
- * @author tiago
+ * @author akira
  */
-public class Wall extends BackgroundElement {
-
-    public Wall(String imageName) {
+public class BackgroundElement extends Element {
+    
+    public BackgroundElement(String imageName) {
         super(imageName);
-        this.isTransposable = false;
     }
-
-    /*
+    
     @Override
     public void autoDraw(Graphics g) {
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
     }
-    */
     
 }
