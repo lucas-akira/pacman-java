@@ -67,16 +67,16 @@ public class GameController {
                             }
                             ((Ghost) eTemp).setReturning(true);
                             if(eTemp instanceof Blinky){
-                                ((Ghost) eTemp).die(new Position(9,8));
+                                ((Ghost) eTemp).die(new Position(10,8));
                             }
                             if(eTemp instanceof Pinky){
-                                ((Ghost) eTemp).die(new Position(9,9));
+                                ((Ghost) eTemp).die(new Position(10,9));
                             }
                             if(eTemp instanceof Inky){
-                                ((Ghost) eTemp).die(new Position(9,10));
+                                ((Ghost) eTemp).die(new Position(10,10));
                             }
                             if(eTemp instanceof Clyde){
-                                ((Ghost) eTemp).die(new Position(9,11));
+                                ((Ghost) eTemp).die(new Position(10,11));
                             }
                         }
                     }
@@ -135,19 +135,19 @@ public class GameController {
             if(eTemp instanceof Ghost){
                 if(((Ghost) eTemp).getReturning()){                                          
                     if(eTemp instanceof Blinky){
-                        ((Ghost) eTemp).die(new Position(9,8));
+                        ((Ghost) eTemp).die(new Position(10,8));
                         eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Pinky){
-                        ((Ghost) eTemp).die(new Position(9,9));
+                        ((Ghost) eTemp).die(new Position(10,9));
                         eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Inky){
-                        ((Ghost) eTemp).die(new Position(9,10));
+                        ((Ghost) eTemp).die(new Position(10,10));
                         eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Clyde){
-                        ((Ghost) eTemp).die(new Position(9,11));
+                        ((Ghost) eTemp).die(new Position(10,11));
                         eTemp.changeImage("eyes.png");
                     }
                     
