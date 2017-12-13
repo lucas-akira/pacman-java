@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Ghost extends Element{
     private int contIntervals;
-    private int tryMove, lastMove, currentMove;
+    protected int tryMove, lastMove, currentMove;
     protected boolean blue = false;
     
         public static final int STOP = 0;
@@ -104,6 +104,7 @@ public class Ghost extends Element{
                 backToLastPosition();
                 setMovDirection(currentMove);
                 move();
+                
                 if (!c.isValidPosition(el, this)) {
                     tryMove = 0;
                     backToLastPosition();
