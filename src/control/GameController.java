@@ -102,19 +102,23 @@ public class GameController {
                             lLolo.setKillStreak(1);
                         }
                             eAux = (Blinky)e.get(1);
-                            eAux.changeImage("blue-ghost.png");
+                            if(!eAux.getReturning())
+                                eAux.changeImage("blue-ghost.png");
                             eAux.setBlue(true);
                             eAux.setMortal(false);
                             eAux = (Pinky) e.get(2);
-                            eAux.changeImage("blue-ghost.png");
+                            if(!eAux.getReturning())
+                                eAux.changeImage("blue-ghost.png");
                             eAux.setBlue(true);
                             eAux.setMortal(false);
                             eAux = (Inky) e.get(3);
-                            eAux.changeImage("blue-ghost.png");
+                            if(!eAux.getReturning())
+                                eAux.changeImage("blue-ghost.png");
                             eAux.setBlue(true);
                             eAux.setMortal(false);
                             eAux = (Clyde) e.get(4);
-                            eAux.changeImage("blue-ghost.png");
+                            if(!eAux.getReturning())
+                                eAux.changeImage("blue-ghost.png");
                             eAux.setBlue(true);
                             eAux.setMortal(false);
                     }
@@ -196,19 +200,23 @@ public class GameController {
             eAux = (Blinky) e.get(1);
             eAux.changeImage("blinky.png");
             eAux.setBlue(false);
-            eAux.setMortal(true);
+            if(!eAux.getReturning())
+                eAux.setMortal(true);
             eAux = (Pinky) e.get(2);
             eAux.changeImage("pinky.png");
             eAux.setBlue(false);
-            eAux.setMortal(true);
+            if(!eAux.getReturning())
+                eAux.setMortal(true);
             eAux = (Inky) e.get(3);
             eAux.changeImage("inky.png");
             eAux.setBlue(false);
-            eAux.setMortal(true);
+            if(!eAux.getReturning())
+                eAux.setMortal(true);
             eAux = (Clyde) e.get(4);
             eAux.changeImage("clyde.png");
             eAux.setBlue(false);
-            eAux.setMortal(true);
+            if(!eAux.getReturning())
+                eAux.setMortal(true);
         }
     }
     
