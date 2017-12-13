@@ -60,6 +60,11 @@ public class GameController {
                 if(eTemp instanceof Ghost){
                     if(((Ghost) eTemp).getBlue()){
                         if(!((Ghost) eTemp).getReturning()){
+                            lLolo.addScore(100 * (int)Math.pow(2, lLolo.getKillStreak()));
+                            if(lLolo.getKillStreak() < 4){
+                                lLolo.addKillStreak(1);
+                                System.out.println("Kill Streak: " + lLolo.getKillStreak());
+                            }
                             ((Ghost) eTemp).setReturning(true);
                             if(eTemp instanceof Blinky){
                                 ((Ghost) eTemp).die(new Position(9,8));
@@ -93,6 +98,9 @@ public class GameController {
                         timerPoder = new Timer();
                         timerPoder.schedule(new FimPoder(e), 7000);
                         poderAtivado = true;
+                        if(lLolo.getKillStreak() == 0){
+                            lLolo.setKillStreak(1);
+                        }
                             eAux = (Blinky)e.get(1);
                             eAux.changeImage("blue-ghost.png");
                             eAux.setBlue(true);
@@ -128,15 +136,19 @@ public class GameController {
                 if(((Ghost) eTemp).getReturning()){                                          
                     if(eTemp instanceof Blinky){
                         ((Ghost) eTemp).die(new Position(9,8));
+                        eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Pinky){
                         ((Ghost) eTemp).die(new Position(9,9));
+                        eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Inky){
                         ((Ghost) eTemp).die(new Position(9,10));
+                        eTemp.changeImage("eyes.png");
                     }
                     if(eTemp instanceof Clyde){
                         ((Ghost) eTemp).die(new Position(9,11));
+                        eTemp.changeImage("eyes.png");
                     }
                     
                 } else {
@@ -169,12 +181,15 @@ public class GameController {
     public class FimPoder extends TimerTask{
         ArrayList<Element> e;
         Ghost eAux;
+        Lolo loloAux;
         
         public FimPoder(ArrayList<Element> e){
             this.e = e;
         }
         
         public void run(){
+            loloAux = (Lolo) e.get(0);
+            loloAux.setKillStreak(0);
             poderAtivado = false;
             eAux = (Blinky) e.get(1);
             eAux.changeImage("blinky.png");
