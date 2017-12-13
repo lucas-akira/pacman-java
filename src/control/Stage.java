@@ -27,7 +27,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import utils.Consts;
 
 /**
@@ -289,53 +288,13 @@ public class Stage {
         timerStrawberry = new Timer();
         timerStrawberry.schedule(new InicioStrawberry(), Consts.STRAWBERRY_TEMPO_INICIO);       
     }
-    
-    public Blinky getBlinky() {
-        return blinky;
-    }
-
-    public void setBlinky(Blinky blinky) {
-        this.blinky = blinky;
-    }
-
-    public Pinky getPinky() {
-        return pinky;
-    }
-
-    public void setPinky(Pinky pinky) {
-        this.pinky = pinky;
-    }
-
-    public Inky getInky() {
-        return inky;
-    }
-
-    public void setInky(Inky inky) {
-        this.inky = inky;
-    }
-
-    public Clyde getClyde() {
-        return clyde;
-    }
-
-    public void setClyde(Clyde clyde) {
-        this.clyde = clyde;
-    }
 
     public Lolo getLolo() {
         return lolo;
     }
-
-    public void setLolo(Lolo lolo) {
-        this.lolo = lolo;
-    }
      
     public ArrayList<Element> getElemArray() {
         return elemArray;
-    }
-
-    public void setElemArray(ArrayList<Element> elemArray) {
-        this.elemArray = elemArray;
     }
 
     public int getLevel() {
@@ -349,37 +308,9 @@ public class Stage {
     public void addLevel(int addition) {
         this.level += addition;
     }
-    
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public String[] getMap() {
-        return map;
-    }
 
     public void setMap(String[] map) {
         this.map = map;
-    }
-
-    public Timer getTimerCherry() {
-        return timerCherry;
-    }
-
-    public void setTimerCherry(Timer timerCherry) {
-        this.timerCherry = timerCherry;
-    }
-
-    public Timer getTimerStrawberry() {
-        return timerStrawberry;
-    }
-
-    public void setTimerStrawberry(Timer timerStrawberry) {
-        this.timerStrawberry = timerStrawberry;
     }
 
     public Fruit getCherry() {

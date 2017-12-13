@@ -1,7 +1,6 @@
 package elements;
 
 import control.GameController;
-import control.Stage;
 import utils.Drawing;
 import java.awt.Graphics;
 import java.io.Serializable;

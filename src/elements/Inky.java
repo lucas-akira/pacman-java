@@ -1,9 +1,6 @@
 package elements;
 
 import control.GameController;
-import utils.Consts;
-import utils.Drawing;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import utils.Position;
 

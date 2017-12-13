@@ -1,7 +1,6 @@
 package control;
 
 import elements.Element;
-import control.GameScreen;
 import elements.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
