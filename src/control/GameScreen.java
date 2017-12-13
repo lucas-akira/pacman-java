@@ -269,7 +269,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
         g2.setColor(Color.WHITE);
-        String temp = "Score: " + lolo.getScore() + " Level: " + level + " Poder: " + controller.poderAtivado;
+        String temp = "Score: " + lolo.getScore() + " Level: " + level + " Poder: " + controller.poderAtivado + " Vidas: " + lolo.getLife();
         g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
         // Sistema de progressão de level baseado no número de pacdots na tela
         if(lolo.totalDots == 0){
@@ -316,15 +316,19 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lolo.setMovDirection(Lolo.STOP);
         } else if (e.getKeyCode() == KeyEvent.VK_T) {
+            boolean ff1, ff2;
+            ff1 = elemArray.remove(cherry);
+            ff2 = elemArray.remove(strawberry);
             Save save = new Save(elemArray, level, lolo, controller.poderAtivado);
             save.SaveFile("Save.dat");
+            if(ff1) elemArray.add(cherry);
+            if(ff2) elemArray.add(strawberry);
         } else if (e.getKeyCode() == KeyEvent.VK_Y) {
             Save load = new Save(elemArray, level, lolo, controller.poderAtivado);
             load.LoadFile("Save.dat");
             level = load.getLevel();
             lolo = load.getLolo();
             lolo.setMovDirection(Lolo.STOP);
-            //controller.timerPoder = load.getTimerPoder();
             elemArray.clear();
             elemArray.addAll(load.getElemArray());
             elemArray.set(0, lolo);
@@ -334,6 +338,12 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                 controller.timerPoder = new Timer();
                 controller.timerPoder.schedule(controller.new FimPoder(elemArray), 7000);
             }
+            timerCherry.cancel();
+            timerCherry = new Timer();
+            timerCherry.schedule(new InicioCherry(), Consts.CHERRY_TEMPO_INICIO);
+            timerStrawberry.cancel();
+            timerStrawberry = new Timer();
+            timerStrawberry.schedule(new InicioStrawberry(), Consts.STRAWBERRY_TEMPO_INICIO);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             //Cheat para testes, para pular de level
             lolo.totalDots=0;

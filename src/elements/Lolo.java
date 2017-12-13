@@ -131,6 +131,8 @@ public class Lolo extends Element  implements Serializable{
         this.currentMove = move;
     }
     
+    public int getLife() { return lives; }
+    
     public void pacmanDies(ArrayList<Element> elements){
         Element elemAux;
         
