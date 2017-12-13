@@ -16,6 +16,7 @@ import elements.Pinky;
 import elements.PowerPallet;
 import elements.Wall;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -105,9 +106,23 @@ public class Stage {
         }
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        g2.setColor(Color.WHITE);
-        String temp = "Score: " + lolo.getScore() + " Level: " + (level+1) + " Poder: " + controller.poderAtivado + " Vidas: " + lolo.getLife();
-        g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
+        if(level != 3){
+            g2.setColor(Color.WHITE);
+            String temp = "Score: " + lolo.getScore() + " Level: " + (level+1) + " Poder: " + controller.poderAtivado + " Vidas: " + lolo.getLife();
+            g2.drawString(temp, 10, Consts.NUM_CELLS*Consts.CELL_SIZE+15);
+        }
+        
+        if(level == 3){
+            /* Se for o Level 3, mostrar na tela o score e o gameover*/
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("impact", Font.PLAIN, 40));
+            String gameOver = "GAME OVER" ;
+            String seuScore = "Seu Score Final" ;
+            g2.drawString(gameOver, 7*Consts.CELL_SIZE+7, 5*Consts.CELL_SIZE);
+            g2.drawString(seuScore, 6*Consts.CELL_SIZE, 9*Consts.CELL_SIZE);
+            g2.drawString("" + lolo.getScore(), 9*Consts.CELL_SIZE+7, 10*Consts.CELL_SIZE+15);
+        }
+        
         g.dispose();
         g2.dispose();
         if (!bufferStrategy.contentsLost()) {
