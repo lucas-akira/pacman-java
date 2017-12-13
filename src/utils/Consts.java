@@ -13,7 +13,7 @@ import java.io.File;
 public class Consts {
     
     //Constante Fator Aleatorio dos Fantasmas
-    public static final double IA_FACIL = 0.15;
+    public static final double IA_FACIL = 0.1;
     
     //Constante de Distancia de Fuga
     public static final double IA_RUN_AWAY_DIST = 5.5;
