@@ -120,7 +120,7 @@ public class Stage {
             String seuScore = "Seu Score Final" ;
             g2.drawString(gameOver, 7*Consts.CELL_SIZE+7, 5*Consts.CELL_SIZE);
             g2.drawString(seuScore, 6*Consts.CELL_SIZE, 9*Consts.CELL_SIZE);
-            g2.drawString("" + lolo.getScore(), 9*Consts.CELL_SIZE+7, 10*Consts.CELL_SIZE+15);
+            g2.drawString("" + lolo.getScore(), 6*Consts.CELL_SIZE, 10*Consts.CELL_SIZE+15);
         }
         
         g.dispose();
