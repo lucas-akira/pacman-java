@@ -117,9 +117,13 @@ public class Stage {
             g2.setFont(new Font("impact", Font.PLAIN, 40));
             String gameOver = "GAME OVER" ;
             String seuScore = "Seu Score Final" ;
+            String restart1 = "Pressione Enter";
+            String restart2 = "para Reiniciar";
             g2.drawString(gameOver, 7*Consts.CELL_SIZE+7, 5*Consts.CELL_SIZE);
             g2.drawString(seuScore, 6*Consts.CELL_SIZE, 9*Consts.CELL_SIZE);
             g2.drawString("" + lolo.getScore(), 6*Consts.CELL_SIZE, 10*Consts.CELL_SIZE+15);
+            g2.drawString(restart1, 5*Consts.CELL_SIZE, 13*Consts.CELL_SIZE);
+            g2.drawString(restart2, 5*Consts.CELL_SIZE, 14*Consts.CELL_SIZE + 10);
         }
         
         g.dispose();

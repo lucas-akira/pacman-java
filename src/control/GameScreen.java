@@ -16,19 +16,9 @@ import java.util.TimerTask;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class GameScreen extends javax.swing.JFrame implements KeyListener {
-    /*
-    private Lolo lolo;
-    private ArrayList<Element> elemArray;
-    private final GameController controller = new GameController();
-    private int level = 0;
-    private int score = 0;
-    private String[] map = new String[3];
-    Timer timerCherry = new Timer();
-    Timer timerStrawberry = new Timer();
-    Fruit cherry = new Fruit("cherry.png", Consts.CHERRY_SCORE, timerCherry);
-    Fruit strawberry = new Fruit("strawberry.png", Consts.STRAWBERRY_SCORE, timerStrawberry);
-    */
+
     private Stage stage;
+    private boolean cheatsEnabled = false;
     public GameScreen() {
         Drawing.setGameScreen(this);
         initComponents();
@@ -94,6 +84,20 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             stage.getLolo().setCurrentMove(Lolo.MOVE_RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             stage.getLolo().setMovDirection(Lolo.STOP);
+        } else if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+            if (stage.getLevel() == 3) {
+                cheatsEnabled = false;                
+            } else {
+                // Ativa ou Desativa os cheats
+                cheatsEnabled = !cheatsEnabled;
+            }
+
+            
+        } else if (e.getKeyCode() == KeyEvent.VK_SLASH) {
+            //Cheat para testes, para pular de level
+            if (cheatsEnabled)
+                stage.getLolo().totalDots = 0;
+            
         } else if (e.getKeyCode() == KeyEvent.VK_T) {
             boolean ff1, ff2;
             ff1 = stage.getElemArray().remove(stage.getCherry());
@@ -107,12 +111,17 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             load.LoadFile("Save.dat");
             stage.loadStage(load);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            //Cheat para testes, para pular de level
-            //lolo.totalDots=0;
-            stage.getLolo().totalDots = 0;
+            
+            // Se esta na tela de Game Over:
+            // Reinicia o jogo na primeira fase
+            if (stage.getLevel() == 3) {
+                stage.getLolo().addLife(4);
+                stage.getLolo().setScore(0);
+                stage.getLolo().totalDots = 0;
+            }       
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
-            //lolo.addScore(1000);
-            stage.getLolo().addScore(1000);
+            if (cheatsEnabled)
+                stage.getLolo().addScore(1000);
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/

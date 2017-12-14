@@ -14,7 +14,6 @@ import utils.Position;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class Ghost extends Element{
-    private int contIntervals;
     protected int tryMove, lastMove, currentMove;
     protected boolean blue = false;
     protected boolean returning = false;
