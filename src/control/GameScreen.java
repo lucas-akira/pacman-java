@@ -1,25 +1,13 @@
 package control;
 
-import elements.Blinky;
-import elements.Clyde;
-//import elements.Skull;
 import elements.Lolo;
-import elements.Element;
-import elements.Inky;
-import elements.Pinky;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Projeto de POO 2017
@@ -28,88 +16,47 @@ import java.util.logging.Logger;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class GameScreen extends javax.swing.JFrame implements KeyListener {
-    
-    private final Lolo lolo;
-    private final ArrayList<Element> elemArray;
-    private final GameController controller = new GameController();
 
+    private Stage stage;
+    private boolean cheatsEnabled = false;
     public GameScreen() {
         Drawing.setGameScreen(this);
         initComponents();
         
         this.addKeyListener(this);   // Adiciona o funcionamento do teclado
-        
-        /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
+
+        //Cria a janela do tamanho do tabuleiro + insets (bordas) da janela
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
-                     Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
+                     (Consts.NUM_CELLS+1) * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
 
-        elemArray = new ArrayList<Element>();
-
-        // Cria o Pacman na posição inicial
-        lolo = new Lolo("pacman.png");
-        lolo.setPosition(13, 10);
-        this.addElement(lolo);
-        
-        // Cria os fantasmas e adiciona eles na tela
-        Blinky blinky = new Blinky("blinky.png");
-        blinky.setPosition(9,8);
-        this.addElement(blinky);
-
-        Pinky pinky = new Pinky("pinky.png");
-        pinky.setPosition(9,9);
-        this.addElement(pinky);
-
-        Inky inky = new Inky("inky.png");
-        inky.setPosition(9,10);
-        this.addElement(inky);
-
-        Clyde clyde = new Clyde("clyde.png");
-        clyde.setPosition(9,11);
-        this.addElement(clyde);
-        
+        // Instancia a fase
+        stage = new Stage();
+        // Função que desenha o restante dos elementos na tela
+        stage.runStage();
     }
-    
-    public final void addElement(Element elem) {
-        elemArray.add(elem);
-    }
-    
-    public void removeElement(Element elem) {
-        elemArray.remove(elem);
-    }
-    
+
     @Override
     public void paint(Graphics gOld) {
-        Graphics g = getBufferStrategy().getDrawGraphics();
+       
+        stage.startTimers();     
+        stage.drawStage(getInsets().right, getInsets().top, getWidth() - getInsets().left, getHeight() - getInsets().bottom, getBufferStrategy());
         
-        /*Criamos um contexto grafico*/
-        Graphics g2 = g.create(getInsets().right, getInsets().top, getWidth() - getInsets().left, getHeight() - getInsets().bottom);
-        
-        /* DESENHA CENARIO
-           Trocar essa parte por uma estrutura mais bem organizada
-           Utilizando a classe Stage
-        */
-        for (int i = 0; i < Consts.NUM_CELLS; i++) {
-            for (int j = 0; j < Consts.NUM_CELLS; j++) {
-                try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "background1.png");
-                    g2.drawImage(newImage,
-                            j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        // Sistema de progressão de level baseado no número de pacdots na tela
+        if(stage.getLolo().totalDots == 0){
+            stage.getController().poderAtivado = false;
+            stage.addLevel(1);
+            if(stage.getLevel() > 2)
+                stage.setLevel(0);
+            stage.runStage();
+        } 
+        if (stage.getController().gameOver == true) {
+            stage.setLevel(3);
+            stage.getController().gameOver = false;
+            stage.runStage();
         }
         
-        this.controller.drawAllElements(elemArray, g2);
-        this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition());
-        
-        g.dispose();
-        g2.dispose();
-        if (!getBufferStrategy().contentsLost()) {
-            getBufferStrategy().show();
-        }
+        //this.setTitle("-> Cell: " + stage.getLolo().getStringPosition() + "Score: " + stage.getLolo().getScore() + "Level: " + stage.getLevel());
+        this.setTitle("Pacman Grupo 6");
     }
     
     public void go() {
@@ -125,20 +72,62 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            lolo.setMovDirection(Lolo.MOVE_UP);
+            stage.getLolo().setMovDirection(Lolo.MOVE_UP);
+            stage.getLolo().setCurrentMove(Lolo.MOVE_UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            lolo.setMovDirection(Lolo.MOVE_DOWN);
+            stage.getLolo().setMovDirection(Lolo.MOVE_DOWN);
+            stage.getLolo().setCurrentMove(Lolo.MOVE_DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            lolo.setMovDirection(Lolo.MOVE_LEFT);
+            stage.getLolo().setMovDirection(Lolo.MOVE_LEFT);
+            stage.getLolo().setCurrentMove(Lolo.MOVE_LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            lolo.setMovDirection(Lolo.MOVE_RIGHT);
+            stage.getLolo().setMovDirection(Lolo.MOVE_RIGHT);
+            stage.getLolo().setCurrentMove(Lolo.MOVE_RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            lolo.setMovDirection(Lolo.STOP);
+            stage.getLolo().setMovDirection(Lolo.STOP);
+        } else if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+            if (stage.getLevel() == 3) {
+                cheatsEnabled = false;                
+            } else {
+                // Ativa ou Desativa os cheats
+                cheatsEnabled = !cheatsEnabled;
+            }
+
+            
+        } else if (e.getKeyCode() == KeyEvent.VK_SLASH) {
+            //Cheat para testes, para pular de level
+            if (cheatsEnabled)
+                stage.getLolo().totalDots = 0;
+            
+        } else if (e.getKeyCode() == KeyEvent.VK_T) {
+            boolean ff1, ff2;
+            ff1 = stage.getElemArray().remove(stage.getCherry());
+            ff2 = stage.getElemArray().remove(stage.getStrawberry());
+            Save save = new Save(stage.getElemArray(), stage.getLevel(), stage.getLolo(), stage.getController().poderAtivado);
+            save.SaveFile("Save.dat");
+            if(ff1) stage.getElemArray().add(stage.getCherry());
+            if(ff2) stage.getElemArray().add(stage.getStrawberry());
+        } else if (e.getKeyCode() == KeyEvent.VK_Y) {
+            Save load = new Save(stage.getElemArray(), stage.getLevel(), stage.getLolo(), stage.getController().poderAtivado);
+            load.LoadFile("Save.dat");
+            stage.loadStage(load);
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            // Se esta na tela de Game Over:
+            // Reinicia o jogo na primeira fase
+            if (stage.getLevel() == 3) {
+                stage.getLolo().addLife(4);
+                stage.getLolo().setScore(0);
+                stage.getLolo().totalDots = 0;
+            }       
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            if (cheatsEnabled)
+                stage.getLolo().addScore(1000);
         }
         
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,3 +167,4 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 }
+
