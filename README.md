@@ -1,4 +1,5 @@
 # Pac-Man
+![pac-man](https://github.com/lucas-akira/pacman-java/blob/master/imgs/game.png)
 
 University of São Paulo - São Carlos
 
@@ -19,7 +20,7 @@ Version of the arcade game Pac-Man made in Java, using the IDE NetBeans 8.2. The
 
 This project was based on a framework made by professor Luiz Eduardo and Jose Fernando Junior. The file "PacMan_Alunos - Arquivos Originais.zip" has this framework from which we developed the project.
 
-The 'Complete project requirements' section contains the English translation of the original PDF file (Projeto-Pacman.pdf) describing the project to be made (in Portuguese) with all the requirements imposed by the professor.
+The 'Complete project requirements' section (coming soon) contains the English translation of the original PDF file (Projeto-Pacman.pdf) describing the project to be made (in Portuguese) with all the requirements imposed by the professor.
 
 ## (some) Project features
 * Three stages
