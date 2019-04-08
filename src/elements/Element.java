@@ -5,8 +5,6 @@ import utils.Position;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
@@ -29,7 +27,8 @@ public abstract class Element implements Serializable{
     final public void changeImage(String imageName){
         try {
             // A linha abaixo identifica o caminho da imagem que foi passada no construtor
-            imageIcon = new ImageIcon( Element.class.getResource(File.separator + imageName) );
+            //imageIcon = new ImageIcon( Element.class.getResource(File.separator + imageName) );
+            imageIcon = new ImageIcon( Element.class.getClassLoader().getResource(imageName) );
             Image img = imageIcon.getImage();
             BufferedImage bi = new BufferedImage(Consts.CELL_SIZE, Consts.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();

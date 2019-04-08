@@ -21,8 +21,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -95,7 +93,8 @@ public class Stage {
         for (int i = 0; i <= Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(Element.class.getResource(File.separator + "background1.png") );
+                    //Image newImage = Toolkit.getDefaultToolkit().getImage(Element.class.getResource(File.separator + "background1.png") );
+                    Image newImage = Toolkit.getDefaultToolkit().getImage(Element.class.getClassLoader().getResource("background1.png") );
                     g2.drawImage(newImage,
                             j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
                     
