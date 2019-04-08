@@ -4,4 +4,4 @@ dist/
 
 *.class
 *.jar
-
+*.dat
